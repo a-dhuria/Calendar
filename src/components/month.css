@@ -1,0 +1,33 @@
+/* Month.css */
+
+.flex-1 {
+    flex: 1;
+  }
+  
+  .grid {
+    display: grid;
+  }
+  
+  .grid-cols-7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  
+  .grid-rows-5 {
+    grid-template-rows: repeat(5, 1fr);
+  }
+  
+  /* You can customize the following styles based on your design preferences */
+  
+  
+  
+  .Day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    border: 1px solid #0c0b0b10;
+    background-color: #ffffff; /* Change to your desired background color */
+  }
+  
+  /* Add additional styling as needed for better aesthetics */
+  

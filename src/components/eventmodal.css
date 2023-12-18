@@ -1,0 +1,128 @@
+/* eventmodal.css */
+
+/* Common styles for overlay and content */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: fixed;
+  background-color: white;
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* Styles for larger screens */
+@media screen and (min-width: 600px) {
+  .modal-content {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  /* Additional styles */
+  .search {
+    border-radius: 15px;
+    margin-right: 15em;
+    padding-right: 13em;
+  }
+}
+
+/* Styles for smaller screens */
+@media screen and (max-width: 599px) {
+  .modal-content {
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    transform: none;
+    width: auto;
+    max-width: none;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  /* Additional styles */
+  .search {
+    border-radius: 15px;
+    margin-right: 1em;
+    padding-right: 1em;
+  }
+}
+
+.apply-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.reject-button {
+  background-color: #FF0000;
+  border: 1px solid #FF0000;
+  color: #FFFFFF;
+  padding: 5px 10px;
+}
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.data-table th {
+  background-color: #f2f2f2;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+

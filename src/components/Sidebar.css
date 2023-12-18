@@ -1,0 +1,69 @@
+.sidebar{
+    
+    background-color: rgb(219, 219, 219);
+}
+
+/* Add these styles for the table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .styled-table th {
+    background-color: #f2f2f2;
+  }
+
+  /* Add these styles for the responsive table container */
+.table-container {
+    max-height: 300px; /* Adjust the max height as needed */
+    overflow-y: auto;
+  }
+  
+  /* Add these styles for the table */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .styled-table th {
+    background-color: #f2f2f2;
+  }
+
+  
+  button.calendar-view-btn {
+    background-color: #3498db; /* Set your desired color */
+    color: #fff; /* Text color */
+    padding: 10px 20px;
+    margin-top: 40px; /* Add margin to move the button down */
+    width: 170px;
+    border: none;
+    border-radius: 5px; /* Adjust the border-radius for a more square or rounded design */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.calendar-view-btn:hover {
+    background-color: #2980b9; /* Change color on hover */
+  }
+  .close {
+    font-size: 24px;
+    /* Add any other styles you need */
+  }
+  
