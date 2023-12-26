@@ -1,8 +1,9 @@
+const fs = require('fs');
 const express = require('express');
 const cors=require('cors');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
-const { parse, isBefore, isAfter, isEqual, addDays, format} = require('date-fns');
+const { parse, isBefore, isAfter, isEqual} = require('date-fns');
 
 const app = express();
 const port = 4000;
@@ -10,7 +11,7 @@ const port = 4000;
 // MySQL database configuration
 const dbConfig = {
   host:"calendar.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306,
-  ssl:{ca:fs.readFileSync("C:\\Users\\adhuria003\\Downloads\\DigiCertGlobalRootCA.crt.pem")}
+  ssl:{ca:fs.readFileSync("DigiCertGlobalRootCA.crt.pem")}
 };
 
 // Middleware to parse JSON data in the request body
@@ -29,14 +30,14 @@ app.get('/search-course', async (req, res) => {
     return res.status(400).json({ error: 'Date parameter is missing' });
   }
 
-  const formattedSearchDate = parse(searchDate, 'dd/MM/yyyy', new Date());
+  const formattedSearchDate = parse(searchDate, 'DD-MM-YYYY', new Date());
   const connection = await createConnection();
 
   try {
     const [results] = await connection.query('SELECT * FROM Calender');
     const coursesOnDate = results.filter((course) => {
-      const courseStartDate = parse(course.startProgramDates, 'dd/MM/yyyy', new Date());
-      const courseEndDate = parse(course.endProgramDates, 'dd/MM/yyyy', new Date());
+      const courseStartDate = parse(course.startProgramDates, 'DD-MM-YYYY', new Date());
+      const courseEndDate = parse(course.endProgramDates, 'DD-MM-YYYY', new Date());
 
       // Check if the search date is within the range of start and end dates
       // Also check if the search date is before the end date or equal to the end date
@@ -132,8 +133,6 @@ app.get('/all-courses', async (req, res) => {
       'SELECT * FROM Calender WHERE STR_TO_DATE(startProgramDates, "%d/%m/%Y") >= ? ORDER BY STR_TO_DATE(startProgramDates, "%d/%m/%Y")',
       [currentDate]
     );
-   
-   
  
     if (results.length === 0) {
       return res.status(404).json({ error: 'No courses found starting from the current date' });
@@ -171,54 +170,55 @@ app.get('/course-details/:courseName', async (req, res) => {
     await connection.end();
   }
 });
-app.get('/courses-count-by-date', async (req, res) => {
-  const connection = await createConnection();
 
-  try {
-    const [results] = await connection.query(
-      'SELECT startProgramDates, endProgramDates, COUNT(*) as courseCount FROM Calender GROUP BY startProgramDates, endProgramDates'
-    );
+// app.get('/courses-count-by-date', async (req, res) => {
+//   const connection = await createConnection();
 
-    if (results.length === 0) {
-      return res.status(404).json({ error: 'No courses found' });
-    }
+//   try {
+//     const [results] = await connection.query(
+//       'SELECT startProgramDates, endProgramDates, COUNT(*) as courseCount FROM Calender GROUP BY startProgramDates, endProgramDates'
+//     );
 
-    const coursesCountByDate = [];
+//     if (results.length === 0) {
+//       return res.status(404).json({ error: 'No courses found' });
+//     }
 
-    results.forEach(({ startProgramDates, endProgramDates, courseCount }) => {
-      const startDate = parse(startProgramDates, 'dd/MM/yyyy', new Date());
-      const endDate = parse(endProgramDates, 'dd/MM/yyyy', new Date());
+//     const coursesCountByDate = [];
 
-      // Count the course for each day between start and end dates
-      for (
-        let currentDay = startDate;
-        isBefore(currentDay, endDate) || isEqual(currentDay, endDate);
-        currentDay = addDays(currentDay, 1)
-      ) {
-        const formattedDate = format(currentDay, 'dd/MM/yyyy');
-        const existingEntry = coursesCountByDate.find(
-          (entry) => entry.date === formattedDate
-        );
+//     results.forEach(({ startProgramDates, endProgramDates, courseCount }) => {
+//       const startDate = parse(startProgramDates, 'DD-MM-YYYY', new Date());
+//       const endDate = parse(endProgramDates, 'DD-MM-YYYY', new Date());
 
-        if (existingEntry) {
-          existingEntry.courseCount += courseCount;
-        } else {
-          coursesCountByDate.push({
-            date: formattedDate,
-            courseCount,
-          });
-        }
-      }
-    });
+//       // Count the course for each day between start and end dates
+//       for (
+//         let currentDay = startDate;
+//         isBefore(currentDay, endDate) || isEqual(currentDay, endDate);
+//         currentDay = addDays(currentDay, 1)
+//       ) {
+//         const formattedDate = format(currentDay, 'DD-MM-YYYY');
+//         const existingEntry = coursesCountByDate.find(
+//           (entry) => entry.date === formattedDate
+//         );
 
-    res.json(coursesCountByDate);
-  } catch (error) {
-    console.error('Error querying database:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  } finally {
-    await connection.end();
-  }
-});
+//         if (existingEntry) {
+//           existingEntry.courseCount += courseCount;
+//         } else {
+//           coursesCountByDate.push({
+//             date: formattedDate,
+//             courseCount,
+//           });
+//         }
+//       }
+//     });
+
+//     res.json(coursesCountByDate);
+//   } catch (error) {
+//     console.error('Error querying database:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   } finally {
+//     await connection.end();
+//   }
+// });
 
 // app.get('/courses-count-by-date', async (req, res) => {
 //   const connection = await createConnection();
@@ -233,12 +233,12 @@ app.get('/courses-count-by-date', async (req, res) => {
 //     const coursesCountByDate = [];
  
 //     results.forEach(({ startProgramDates, endProgramDates, courseCount }) => {
-//       const startDate = parse(startProgramDates, 'dd/MM/yyyy', new Date());
-//       const endDate = parse(endProgramDates, 'dd/MM/yyyy', new Date());
+//       const startDate = parse(startProgramDates, 'DD-MM-YYYY', new Date());
+//       const endDate = parse(endProgramDates, 'DD-MM-YYYY', new Date());
  
 //       // Count the course for each day between start and end dates
 //       for (let currentDay = startDate; isBefore(currentDay, endDate) || isEqual(currentDay, endDate); currentDay = addDays(currentDay, 1)) {
-//         const formattedDate = format(currentDay, 'dd/MM/yyyy');
+//         const formattedDate = format(currentDay, 'DD-MM-YYYY');
 //         const existingEntry = coursesCountByDate.find((entry) => entry.date === formattedDate);
  
 //         if (existingEntry) {
@@ -274,8 +274,8 @@ app.get('/all-courses-with-status', async (req, res) => {
     const currentDate = new Date();
    
     const coursesWithStatus = results.map((course) => {
-      const courseStartDate = course.startProgramDates==='TBD' ? null: parse(course.startProgramDates, 'dd/MM/yyyy', new Date());
-      const courseEndDate = parse(course.endProgramDates, 'dd/MM/yyyy', new Date());
+      const courseStartDate = course.startProgramDates==='TBD' ? null: parse(course.startProgramDates, 'DD-MM-YYYY', new Date());
+      const courseEndDate = parse(course.endProgramDates, 'DD-MM-YYYY', new Date());
  
       let status = '';
       if(courseStartDate===null){

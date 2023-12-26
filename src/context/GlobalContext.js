@@ -1,11 +1,12 @@
-import { createContext, useState } from "react";
+// GlobalContext.js
+import { createContext, useState, useEffect } from "react";
  
 const GlobalContext = createContext();
  
 export const GlobalProvider = ({ children }) => {
   const [daySelected, setDaySelected] = useState(null);
   const [showEventModal, setShowEventModal] = useState(false);
-  const [filteredEvents, setFilteredEvents] = useState([]); // Assuming you have a filteredEvents state
+  const [filteredEvents, setFilteredEvents] = useState([]);
  
   const contextValue = {
     daySelected,
@@ -15,10 +16,10 @@ export const GlobalProvider = ({ children }) => {
     filteredEvents,
     setFilteredEvents,
   };
-
+ 
   const fetchDataFromBackend = async () => {
     try {
-      const response = await fetch('http://localhost:4000/courses-count-by-date'); // Assuming this is your backend endpoint
+      const response = await fetch('http://localhost:4000/courses-count-by-date');
       const data = await response.json();
       setFilteredEvents(data);
     } catch (error) {
@@ -26,12 +27,17 @@ export const GlobalProvider = ({ children }) => {
     }
   };
  
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchDataFromBackend();
+  }, []);
+ 
   return (
-<GlobalContext.Provider value={{contextValue,filteredEvents,
-        fetchDataFromBackend}}>
+    <GlobalContext.Provider value={{ contextValue, fetchDataFromBackend }}>
       {children}
-</GlobalContext.Provider>
+    </GlobalContext.Provider>
   );
 };
  
 export default GlobalContext;
+ 

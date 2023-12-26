@@ -1,5 +1,5 @@
 /* eventmodal.css */
-
+ 
 /* Common styles for overlay and content */
 .modal-overlay {
   position: fixed;
@@ -13,7 +13,7 @@
   align-items: center;
   z-index: 1000;
 }
-
+ 
 .modal-content {
   position: fixed;
   background-color: white;
@@ -23,7 +23,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 }
-
+ 
 /* Styles for larger screens */
 @media screen and (min-width: 600px) {
   .modal-content {
@@ -33,7 +33,7 @@
     width: 80%;
     max-width: 1000px;
   }
-
+ 
   .close-button {
     position: absolute;
     top: 10px;
@@ -44,7 +44,7 @@
     border: none;
     outline: none;
   }
-
+ 
   /* Additional styles */
   .search {
     border-radius: 15px;
@@ -52,7 +52,7 @@
     padding-right: 13em;
   }
 }
-
+ 
 /* Styles for smaller screens */
 @media screen and (max-width: 599px) {
   .modal-content {
@@ -63,7 +63,7 @@
     width: auto;
     max-width: none;
   }
-
+ 
   .close-button {
     position: absolute;
     top: 10px;
@@ -74,7 +74,7 @@
     border: none;
     outline: none;
   }
-
+ 
   /* Additional styles */
   .search {
     border-radius: 15px;
@@ -82,7 +82,7 @@
     padding-right: 1em;
   }
 }
-
+ 
 .apply-button {
   background-color: #4caf50;
   color: white;
@@ -96,33 +96,33 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
+ 
 .reject-button {
   background-color: #FF0000;
   border: 1px solid #FF0000;
   color: #FFFFFF;
   padding: 5px 10px;
 }
-
+ 
 .data-table {
   border-collapse: collapse;
   width: 100%;
 }
-
+ 
 .data-table th,
 .data-table td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
-
+ 
 .data-table th {
   background-color: #f2f2f2;
 }
-
+ 
 .table-container {
   max-height: 400px;
   overflow-y: auto;
 }
-
-
+ 
+ 

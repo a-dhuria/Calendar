@@ -1,66 +1,94 @@
 /* Add this CSS to your existing styles or create a new stylesheet */
-
+ 
 /* Container styles */
 .border {
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   margin: 2px;
 }
-
+ 
 .calendarbox {
-  background-color: rgb(219, 219, 219);
+  background-color: #FFF;
+  border: 1px solid #BBB;
+  min-width: 120px;
+  min-height: 100px;
+  max-height: 120px;
+}
+ 
+.calendarbox:hover {
+  border: 2px solid #FFC83D;
+}
+ 
+/* Additional Animation for Background Color Transition */
+.calendarbox, .event-item {
   transition: background-color 0.3s ease; /* Add transition for background color change */
 }
-
+ 
+.bg-past-date{
+  background: repeating-linear-gradient(
+  45deg,
+  #EEE,
+  #EEE 10px,
+  #FEFEFE 10px,
+  #FEFEFE 20px
+);
+ 
+color: #888;
+}
+.bg-future-date {
+  background: repeating-linear-gradient(
+    45deg,
+    #E5FFEC,
+    #E5FFEC 10px,
+    #F4FFF4 10px,
+    #F4FFF4 20px
+  );
+  color: #0b7f45;
+}
+ 
 .day {
   font-weight: 600;
   font-size: 1rem;
 }
-
+ 
 .number {
   font-weight: 800;
   color: black;
   /* background-color: #0b7f45; */
 }
-
-.calendarbox:hover {
-  background-color: #ff6e86;
-}
-
 /* Header styles */
 .text-sm {
   font-size: 12px;
 }
-
+ 
 /* Day label styles */
 .text-day-label {
   margin-top: 5px;
   text-transform: uppercase;
 }
-
+ 
 /* Current day styles */
 .bg-blue-600 {
   background-color: #0b64ca;
   color: #ffffff;
 }
-
+ 
 .rounded-full {
   border-radius: 50%;
 }
-
+ 
 /* Day number styles */
 .text-day-number {
   padding: 5px;
   margin: 5px;
   text-align: center;
 }
-
+ 
 /* Event container styles */
 .flex-1 {
   cursor: pointer;
-  padding: 10px;
 }
-
+ 
 /* Event item styles */
 .event-item {
   padding: 5px;
@@ -74,42 +102,37 @@
   white-space: nowrap;
   transition: background-color 0.3s ease; /* Add transition for background color change */
 }
-
+ 
 /* Event label styles */
 .event-label {
   font-weight: bold;
 }
-
+ 
 /* Event background colors based on label */
 .bg-work {
   background-color: #f3f4f6;
 }
-
+ 
 .bg-personal {
   background-color: #fcd34d;
 }
-
+ 
 .bg-meeting {
   background-color: #22c55e;
 }
-
+ 
 /* Hover effect for event items */
 .event-item:hover {
   background-color: #e2e8f0;
 }
-
+ 
 .highlight-event-day {
   background-color: yellow;
 }
-
-/* Additional Animation for Background Color Transition */
-.calendarbox, .event-item {
-  transition: background-color 0.3s ease; /* Add transition for background color change */
-}
-
+ 
 /* day.css */
 .highlight-event-day {
   background-color: lightyellow;
 }
-
+ 
 /* Add more styles as needed */

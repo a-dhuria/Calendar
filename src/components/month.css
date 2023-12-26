@@ -1,25 +1,31 @@
 /* Month.css */
-
-.flex-1 {
-    flex: 1;
-  }
-  
+.Month{
+  min-width: 900px;
+  max-width: 1400px;
+  min-height: 100px;
+  display: grid;
+}
+ 
   .grid {
     display: grid;
   }
-  
+ 
   .grid-cols-7 {
     grid-template-columns: repeat(7, 1fr);
   }
-  
-  .grid-rows-5 {
-    grid-template-rows: repeat(5, 1fr);
+ 
+ 
+  .Month.grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(170px, 1fr));
   }
-  
+ 
+  .grid-rows-6 {
+    grid-template-rows: repeat(6, 1fr);
+  }
+ 
   /* You can customize the following styles based on your design preferences */
-  
-  
-  
+ 
+ 
   .Day {
     display: flex;
     align-items: center;
@@ -28,6 +34,6 @@
     border: 1px solid #0c0b0b10;
     background-color: #ffffff; /* Change to your desired background color */
   }
-  
+ 
   /* Add additional styling as needed for better aesthetics */
-  
+ 

@@ -9,7 +9,7 @@ import GlobalContext from "./context/GlobalContext";
 import EventModal from "./components/EventModal";
 // import RegistrationForm from './components/registration';
 //import EnrollmentForm from "./components/registration"; // Import the EnrollmentForm component
-
+ 
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
@@ -17,21 +17,20 @@ function App() {
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
-
+ 
   return (
     <React.Fragment>
       <div className="h-screen flex flex-col">
         <CalendarHeader />
-        <div className="flex flex-1">
+        <div className="main-content-area">
           <Sidebar />
           <Month month={currentMonth} />
           {showEventModal && <EventModal />}
-          {/* <EnrollmentForm /> Add the EnrollmentForm component here */}
-          {/* <RegistrationForm eventDetails={eventDetails} /> */}
         </div>
       </div>
     </React.Fragment>
   );
 }
-
+ 
 export default App;
+ 

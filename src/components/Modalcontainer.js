@@ -1,27 +1,29 @@
 // ModalContainer.js
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./modalcontainer.css";
 import GlobalContext from "../context/GlobalContext";
-
+ 
 const ModalContainer = ({ children, onClose }) => {
   const { setShowEventModal } = useContext(GlobalContext);
-
+  const [isCloseButtonClicked, setIsCloseButtonClicked] = useState(false);
+ 
   const handleCloseModal = () => {
-    console.log("Close button clicked"); // Add this line for debugging
     setShowEventModal(false);
+    setIsCloseButtonClicked(true);
+ 
     if (onClose) {
       onClose();
     }
   };
-
+ 
   return (
-    <div className="modal-container">
+    <div className={`modal-container ${isCloseButtonClicked ? "closed" : ""}`}>
       <button className="close" onClick={handleCloseModal}>
-        
+        &#10006;
       </button>
       {children}
     </div>
   );
 };
-
+ 
 export default ModalContainer;

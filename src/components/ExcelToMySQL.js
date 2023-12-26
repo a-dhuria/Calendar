@@ -1,19 +1,16 @@
-//const fs = require('fs');
+const fs = require('fs');
 const mysql = require('mysql2/promise');
 const exceljs = require('exceljs');
 const moment = require('moment');
 
 // MySQL database configuration
 const dbConfig = {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'root',
-  database: 'calender',
+  host:"calendar.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306,
+  ssl:{ca:fs.readFileSync("C:\\Users\\adhuria003\\Downloads\\DigiCertGlobalRootCA.crt.pem")}
 };
 
 // Path to your Excel file
-const excelFilePath = 'C:\\Users\\vu003\\Documents\\React-Project\\Demo\\calendar\\Calendar.xlsx';
+const excelFilePath = 'C:\\Users\\adhuria003\\Downloads\\calendar (4)\\calendar\\Calendar.xlsx';
 
 async function createConnection() {
   return await mysql.createConnection(dbConfig);
@@ -89,8 +86,8 @@ async function insertData(sheetName, rows) {
       }
       const data = [
         row['Source'],
-        startProgramDate.isValid() ? startProgramDate.format('DD/MM/YYYY') : 'TBD',
-        endProgramDate.isValid() ? endProgramDate.format('DD/MM/YYYY') : 'TBD',
+        startProgramDate.isValid() ? startProgramDate.format('DD-MM-YYYY') : 'TBD',
+        endProgramDate.isValid() ? endProgramDate.format('DD-MM-YYYY') : 'TBD',
         row['Start Time'],
         row['End Time'],
         row['Course Name'],

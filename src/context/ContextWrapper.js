@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
-
+ 
 function savedEventsReducer(state, { type, payload }) {
   switch (type) {
     case "push":
@@ -26,7 +26,7 @@ function initEvents() {
   const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
   return parsedEvents;
 }
-
+ 
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
@@ -39,7 +39,7 @@ export default function ContextWrapper(props) {
     [],
     initEvents
   );
-
+ 
   const filteredEvents = useMemo(() => {
     return savedEvents.filter((evt) =>
       labels
@@ -48,11 +48,11 @@ export default function ContextWrapper(props) {
         .includes(evt.label)
     );
   }, [savedEvents, labels]);
-
+ 
   useEffect(() => {
     localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
   }, [savedEvents]);
-
+ 
   useEffect(() => {
     setLabels((prevLabels) => {
       return [...new Set(savedEvents.map((evt) => evt.label))].map(
@@ -68,25 +68,25 @@ export default function ContextWrapper(props) {
       );
     });
   }, [savedEvents]);
-
+ 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
       setMonthIndex(smallCalendarMonth);
     }
   }, [smallCalendarMonth]);
-
+ 
   useEffect(() => {
     if (!showEventModal) {
       setSelectedEvent(null);
     }
   }, [showEventModal]);
-
+ 
   function updateLabel(label) {
     setLabels(
       labels.map((lbl) => (lbl.label === label.label ? label : lbl))
     );
   }
-
+ 
   return (
     <GlobalContext.Provider
       value={{

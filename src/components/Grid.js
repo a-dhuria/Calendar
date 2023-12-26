@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import { Box, Typography } from '@mui/material';
 import ViewDownload from './ViewDownload';
-
+ 
 const columns = [
     { field: 'id', headerName: 'SL. No', width: 70, headerClassName: 'super-app-theme--header' },
    
@@ -26,7 +26,7 @@ const columns = [
         // renderCell: renderDetailsButton
     }
 ];
-
+ 
 const rows = [
     {
         id: 1,
@@ -42,7 +42,7 @@ const rows = [
         action: 'View/Download'
     }
 ];
-
+ 
 const Document = () => {
     return (
         <>
@@ -78,5 +78,5 @@ const Document = () => {
         </>
     );
 };
-
+ 
 export default Document;

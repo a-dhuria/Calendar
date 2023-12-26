@@ -1,0 +1,4 @@
+nodeProcessCommandLine: "node"
+loggingEnabled: true
+devErrorsEnabled: true
+debugHeaderEnabled: true

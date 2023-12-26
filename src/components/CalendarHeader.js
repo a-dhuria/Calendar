@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./calendarheader.css"
 import dayjs from "dayjs";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-pwc-white-2x.png";
 import GlobalContext from "../context/GlobalContext";
 import RegistrationForm from "./registration";
 import ModalContainer from "./Modalcontainer";
@@ -83,7 +83,7 @@ const CourseSearch = () => {
 
     // setLoading(true);
 
-    fetch(`http://localhost:4000/course-details/${searchTerm}`)
+    fetch(`https://prod-03.eastus.logic.azure.com/workflows/cee80b6774154f629872cdfcb3b9534e/triggers/manual/paths/invoke/coursedetails/${searchTerm}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oAYgqU-7DO-hvw6T6rmAgvmVVGT3ZclBvvBUH-aZgTU`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -92,7 +92,7 @@ const CourseSearch = () => {
       })
       .then((data) => {
         console.log("Data received:", data);
-        setSearchResults(data);
+        setSearchResults(data.Table1);
         // setLoading(false);
         setDropdownOpen(true);
       })
@@ -163,25 +163,28 @@ const CourseSearch = () => {
   };
 
   return (
-    <header className="px-4 py-2 flex items-center relative">
-      <img src={logo} alt="calendar" className="logo" />
-      <h1 className="mr-10 text-xl text-black-500 font-bold">Calendar</h1>
-      <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
+    <header>
+      <div className="header-row-1">
+        <img src={logo} alt="PwC Logo - White outlined" className="logo" />
+        <p className="header-row-1-title">Cloud Academy Calendar</p>
+      </div>
+      <div className="header-row-2">
+      <button onClick={handleReset} className="button-calendar-today">
         Today
       </button>
-      <button onClick={handlePrevMonth}>
+      <button onClick={handlePrevMonth} className="button-navigation-arrows">
         <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
           chevron_left
         </span>
       </button>
-      <button onClick={handleNextMonth}>
+      <button onClick={handleNextMonth} className="button-navigation-arrows">
         <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
           chevron_right
         </span>
       </button>
-      <h2 className="ml-4 text-xl text-black-500 font-bold">
+      <p className="ml-4 text-xl text-black-500">
         {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
-      </h2>
+      </p>
       <div>
         <input
           className="searchFor"
@@ -222,8 +225,11 @@ const CourseSearch = () => {
           />
         </ModalContainer>
       )}
+      </div>
+     
     </header>
   );
 };
-
+ 
 export default CourseSearch;
+ 

@@ -34,8 +34,8 @@ export default function SmallCalendar() {
 
   async function fetchUpcomingEvents() {
     try {
-      const response = await axios.get('http://localhost:4000/all-courses');
-      setUpcomingEvents(response.data);
+      const response = await axios.get('https://prod-17.eastus.logic.azure.com/workflows/ac8cf86579904d358d03b03b3cc0a730/triggers/manual/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GVnS3KmVBdCRFxG58EM1lB3Exskb9zYGTltrQpjLwwU');
+      setUpcomingEvents(response.data.Table1);
     } catch (error) {
       console.error('Error fetching upcoming events:', error);
     }
