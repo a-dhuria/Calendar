@@ -1,16 +1,18 @@
-const fs = require('fs');
 const mysql = require('mysql2/promise');
 const exceljs = require('exceljs');
+const fs = require('fs');
 const moment = require('moment');
+
 
 // MySQL database configuration
 const dbConfig = {
-  host:"calendar.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306,
-  ssl:{ca:fs.readFileSync("C:\\Users\\adhuria003\\Downloads\\DigiCertGlobalRootCA.crt.pem")}
+  host:"gcalendar.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306, ssl:{ca:fs.readFileSync("C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\DigiCertGlobalRootCA.crt.pem")}
 };
 
+// var conn=mysql.createConnection({host:"gcalendar.mysql.database.azure.com", user:"GCal", password:"{your_password}", database:"{your_database}", port:3306, ssl:{ca:fs.readFileSync("{ca-cert filename}")}});
+
 // Path to your Excel file
-const excelFilePath = 'C:\\Users\\adhuria003\\Downloads\\calendar (4)\\calendar\\Calendar.xlsx';
+const excelFilePath = 'C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\Calendar.xlsx';
 
 async function createConnection() {
   return await mysql.createConnection(dbConfig);
@@ -69,8 +71,8 @@ async function insertData(sheetName, rows) {
 
     const sql = `
       INSERT INTO Calender 
-      (source, startProgramDates, endProgramDates, startTime, endTime, courseName, targetAudience, format) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      (source, startProgramDates, endProgramDates, startTime, endTime, courseName, targetAudience, format, registrationLink) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     try {
@@ -81,8 +83,14 @@ async function insertData(sheetName, rows) {
       if (['January', 'February', 'March'].includes(startProgramDate.format('MMMM'))) {
         startProgramDate.year(2024);
       }
+      else if (['November', 'December'].includes(startProgramDate.format('MMMM'))) {
+        startProgramDate.year(2023);
+      }
       if (['January', 'February', 'March'].includes(endProgramDate.format('MMMM'))) {
         endProgramDate.year(2024);
+      }
+      else if (['November', 'December'].includes(endProgramDate.format('MMMM'))) {
+        endProgramDate.year(2023);
       }
       const data = [
         row['Source'],
@@ -92,7 +100,8 @@ async function insertData(sheetName, rows) {
         row['End Time'],
         row['Course Name'],
         row['Target Audience'],
-        row['Format']
+        row['Format'],
+        row['Registration Link']
       ];
 
       const [results] = await connection.query(sql, data);

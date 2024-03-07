@@ -7,25 +7,33 @@ import Sidebar from "./components/Sidebar";
 import Month from "./components/Month";
 import GlobalContext from "./context/GlobalContext";
 import EventModal from "./components/EventModal";
-// import RegistrationForm from './components/registration';
-//import EnrollmentForm from "./components/registration"; // Import the EnrollmentForm component
- 
+
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showEventModal } = useContext(GlobalContext);
-  // const eventDetails = { eventName: 'Sample Event', date: '2023-12-10' };
+  const { monthIndex} = useContext(GlobalContext);
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
+
+  function logScreenWidth() {
+    console.log("Current screen width: "  +window.innerWidth);
+    console.log("Current screen height: " +window.innerHeight);
+  }
+  document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        logScreenWidth();
+      }
+    }
+  );
  
   return (
     <React.Fragment>
-      <div className="h-screen flex flex-col">
+      <div className="overall">
         <CalendarHeader />
         <div className="main-content-area">
           <Sidebar />
           <Month month={currentMonth} />
-          {showEventModal && <EventModal />}
+          <EventModal />
         </div>
       </div>
     </React.Fragment>

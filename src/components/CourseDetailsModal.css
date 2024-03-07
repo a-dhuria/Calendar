@@ -1,0 +1,138 @@
+.modal-content {
+    color: #000000; 
+    padding: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.course-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.courseDetailTitle{
+    font-size: 1rem;
+    font-weight: 600;
+}
+  
+.course-details-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+.apply-button {
+    background-color: #ffc609;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 3px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.7rem;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+  @media(min-width: 300px){
+    .course-details-table td{
+        font-size: 0.2rem;
+    }
+    .courseDetailTitle{
+        font-size: 0.3rem;
+    }
+    .apply-button{
+        font-size: 0.3rem;
+        padding: 3px 30px;
+    }
+    .close{
+        font-size: 12px;
+    }
+  }
+
+
+  @media(min-width: 600px){
+    .course-details-table td{
+        font-size: 0.4rem;
+    }
+    .courseDetailTitle{
+        font-size: 0.5rem;
+    }
+    .apply-button{
+        font-size: 0.4rem;
+        padding: 3px 30px;
+    }
+    .close{
+        font-size: 12px;
+    }
+  }
+
+  @media(min-width: 890px){
+    .course-details-table td{
+        font-size: 0.5rem;
+    }
+    .courseDetailTitle{
+        font-size: 0.6rem;
+    }
+    .apply-button{
+        font-size: 0.7rem;
+        padding: 3px 20px;
+    }
+    .close{
+        font-size: 12px;
+    }
+  }
+
+
+  @media(min-width: 1300px){
+    .course-details-table td{
+        font-size: 0.6rem;
+    }
+    .courseDetailTitle{
+        font-size: 1rem;
+    }
+    .apply-button{
+        font-size: 1rem;
+        padding: 3px 30px;
+    }
+    .close{
+        font-size: 12px;
+    }
+  }
+
+  @media(min-width: 2000px){
+    .course-details-table td{
+        font-size: 1.2rem;
+    }
+    .courseDetailTitle{
+        font-size: 1.4rem;
+    }
+    .apply-button{
+        font-size: 0.8rem;
+    }
+    .close{
+        font-size: 12px;
+    }
+  }
+
+  @media(min-width: 3000px){
+    .course-details-table td{
+        font-size: 1.5rem;
+    }
+    .courseDetailTitle{
+        font-size: 1.7rem;
+    }
+    .apply-button{
+        font-size: 0.8rem;
+    }
+    .close{
+        font-size: 12px;
+    }
+}

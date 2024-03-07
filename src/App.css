@@ -1,9 +1,27 @@
-/* Existing code */
- 
+.overall{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+
 .main-content-area{
   display: flex;
-  padding: 10px;
-  margin: 1px auto;
+  padding-top: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+@media (min-width: 500px){
+  .main-content-area{
+    padding-top: 3px;
+  }
+}
+
+@media (min-width: 786px){
+  .main-content-area{
+    padding-top: 5px;
+  }
 }
  
 .App-header {
@@ -22,7 +40,6 @@
 }
  
 body {
-  /*background-color: #e86153;*/
   overflow: hidden;
   margin: 0;
 }

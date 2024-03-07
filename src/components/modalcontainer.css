@@ -1,21 +1,17 @@
-/* modalcontainer.css */
 .modal-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white; /* Adjust the background color as needed */
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a box shadow for a subtle effect */
+  box-shadow: 0 0 2 px rgba(0, 0, 0, 0.2); 
   padding: 20px;
-  max-width: 80%; /* Set a maximum width for the modal container */
-  max-height: 80%; /* Set a maximum height for the modal container */
-  overflow: auto; /* Enable scrolling if content exceeds the modal size */
+  width: 60%;
+  max-width: 80%; 
+  overflow: auto;
+  z-index: 100;
 }
-
-/* Add additional styling as needed */
-/* modalcontainer.css */
-
 
 .closed {
 display: none; /* or add styles to hide the modal when closed */
