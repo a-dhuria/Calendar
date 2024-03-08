@@ -12,7 +12,7 @@ const dbConfig = {
 };
 
 // Path to save the generated Excel file
-const outputFilePath = 'C:\\Users\\vu003\\Documents\\React-Project\\Demo\\Enrollment.xlsx';
+const outputFilePath = 'C:\\Users\\adhuria003\\Downloads\\calendar (4)\\calendar\\Enrollment.xlsx';
 
 // Function to fetch data from MySQL
 async function fetchDataFromMySQL() {

@@ -1,39 +1,78 @@
 /* Month.css */
 .Month{
-  min-width: 900px;
-  max-width: 1400px;
-  min-height: 100px;
+  display: grid;
+  z-index: 0;
+  height: 80%;
+}
+ 
+.grid {
   display: grid;
 }
  
-  .grid {
-    display: grid;
+.grid-cols-7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.Month.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(130px, 1fr));
+}
+ 
+.grid-rows-6 {
+  grid-template-rows: repeat(6, 1fr);
+}
+
+@media (min-width: 100px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(30px, 1fr));
   }
- 
-  .grid-cols-7 {
-    grid-template-columns: repeat(7, 1fr);
+}
+
+@media (min-width: 300px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(30px, 1fr));
   }
- 
- 
-  .Month.grid-cols-7 {
-    grid-template-columns: repeat(7, minmax(170px, 1fr));
+}
+
+@media (min-width: 500px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(45px, 1fr));
   }
- 
-  .grid-rows-6 {
-    grid-template-rows: repeat(6, 1fr);
+}
+
+@media (min-width: 650px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(60px, 1fr));
+
   }
- 
+}
+
+@media (min-width: 786px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(82px, 1fr));
+
+  }
+}
+@media (min-width: 1250px){
+  .Month.grid-cols-7{
+    grid-template-columns: repeat(7, minmax(90px, 1fr));
+  }
+}
+
+
   /* You can customize the following styles based on your design preferences */
  
+.alertMessage{
+  color: red;
+  width: 100%;
+}
+
+.Day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 2px solid #ff0000;
+  background-color: #ffffff;  
+}
  
-  .Day {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    border: 1px solid #0c0b0b10;
-    background-color: #ffffff; /* Change to your desired background color */
-  }
- 
-  /* Add additional styling as needed for better aesthetics */
  

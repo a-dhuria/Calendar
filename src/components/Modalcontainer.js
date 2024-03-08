@@ -8,7 +8,6 @@ const ModalContainer = ({ children, onClose }) => {
   const [isCloseButtonClicked, setIsCloseButtonClicked] = useState(false);
  
   const handleCloseModal = () => {
-    setShowEventModal(false);
     setIsCloseButtonClicked(true);
  
     if (onClose) {

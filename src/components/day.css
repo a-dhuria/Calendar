@@ -1,6 +1,3 @@
-/* Add this CSS to your existing styles or create a new stylesheet */
- 
-/* Container styles */
 .border {
   border-radius: 4px;
   overflow: hidden;
@@ -8,17 +5,87 @@
 }
  
 .calendarbox {
-  background-color: #FFF;
-  border: 1px solid #BBB;
-  min-width: 120px;
-  min-height: 100px;
-  max-height: 120px;
+  position:relative;
+  border: 1px solid #ff9500;
+  cursor: pointer;
+  height: 100%;
+  background-color: #f1f1f1;
+  z-index: 100;
+  width: 100%;
 }
- 
-.calendarbox:hover {
-  border: 2px solid #FFC83D;
+
+.dayEvents{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  justify-content: center;
+  width: 70%;
+  border-radius: 0rem 5rem 5rem 0rem; 
 }
- 
+
+.daysWeek{
+  font-size: 0.6rem;
+}
+
+.daysNumber{
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.boxHeight{
+  height: 5.35rem;
+}
+
+.dayEvents_para{
+  font-size: 0.8rem;
+}
+
+.none{
+  display: hidden;
+  position: absolute;
+}
+
+.profile {
+  margin: 0 auto;
+  padding: 5px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff4e4;
+}  
+
+.profile_title {
+    color: #fff4e4;
+    font-weight: 800;
+    font-size: 0.3rem;
+}
+.profile_para {
+    color: rgba(black, 0.8);
+    font-size: 0.6rem;
+}
+
+/* Use this class name once the data is available*/
+.hasEvents{
+  background-color: #dedede;
+}
+
+.hasEvents::before{
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 50%, rgb(234, 234, 234) 50%, rgb(170, 170, 170) 60%);
+  border-radius: 0 0 0.5em 0;
+  transition: 0.3s;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+
 /* Additional Animation for Background Color Transition */
 .calendarbox, .event-item {
   transition: background-color 0.3s ease; /* Add transition for background color change */
@@ -48,13 +115,12 @@ color: #888;
  
 .day {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.5rem;
 }
  
 .number {
   font-weight: 800;
   color: black;
-  /* background-color: #0b7f45; */
 }
 /* Header styles */
 .text-sm {
@@ -69,8 +135,9 @@ color: #888;
  
 /* Current day styles */
 .bg-blue-600 {
-  background-color: #0b64ca;
-  color: #ffffff;
+  background-color: #dedede;
+  color: #ff6a00;
+  font-weight: 800;
 }
  
 .rounded-full {
@@ -114,7 +181,7 @@ color: #888;
 }
  
 .bg-personal {
-  background-color: #fcd34d;
+  background-color: #ff9500
 }
  
 .bg-meeting {
@@ -134,5 +201,657 @@ color: #888;
 .highlight-event-day {
   background-color: lightyellow;
 }
- 
-/* Add more styles as needed */
+
+.bookmarkBtn {
+  width: 60%;
+  height: 45%;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.349);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  margin-top: 0.8rem;
+}
+
+.eventDetailsBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5px;
+  margin-bottom: 0.2rem;
+  overflow: auto;  
+  scrollbar-width: thin; 
+  max-height: 100px;
+  height: 100%;
+  width: 100%;	
+}
+
+.eventDetailsBox::-webkit-scrollbar{
+  width: 12rem;
+}
+.eventsDetailsOnBox_text::-webkit-scrollbar-thumb {  
+  background-color: #fd0000;  
+  border-radius: 3px;  
+}  
+.eventsDetailsOnBox_text::-webkit-scrollbar-thumb:hover {  
+  background-color: #ed1212;  
+}  
+.eventsDetailsOnBox_text::-webkit-scrollbar-track {  
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 1px; 
+} 
+
+.eventsDetailsOnBox_text{
+  background-color: #f1f1f1;
+  padding: 1px;
+  font-size: 0.5rem;
+  font-weight: 600;
+  padding-left: 0.4rem;
+}
+
+.IconContainer {
+  width: 30%;
+  margin-left: 0rem;
+  height: 100%;
+  background: #cacaca;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: 0.3s;
+}
+
+.icon {
+  border-radius: 2px;
+  height: 60%;
+}
+
+.text {
+  height: 100%;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  z-index: 1;
+  transition-duration: 0.3s;
+  font-size: 0.5rem;  
+}
+
+.bookmarkBtn:hover .IconContainer {
+  width: 90px;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+  transform: translate(10px);
+  width: 0;
+  font-size: 0;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+  transform: scale(0.95);
+  transition-duration: 0.3s;
+}
+
+@media (max-width: 500px){
+  .profile{
+    display: none;
+  }
+}
+
+@media (min-width: 100px){
+  .boxHeight{
+    height: 4.3rem;
+  }
+  .daysWeek{
+    font-size: 0.2rem;
+  }
+  .day{
+    font-size: 0.2rem;
+  }
+  .daysNumber{
+    font-size: 0.25rem;
+  }
+  .text{
+    font-size: 0.2rem;
+    margin-right: 0.3rem;
+  }
+  .bookmarkBtn{
+    width: 100%;
+    height: 35%;
+    margin-top: 0.5rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.25rem;
+  }
+  .IconContainer{
+    width: 40%;
+  }
+  .profile{
+    padding: 0.1rem 0.1rem;
+  }
+  .profile_title{
+    font-size: 0.4rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 0.9em;
+    height: 0.9em;
+  }
+}
+
+
+
+@media (min-width: 300px){
+  .boxHeight{
+    height:4.5rem;
+  }
+  .daysWeek{
+    font-size: 0.2rem;
+  }
+  .day{
+    font-size: 0.2rem;
+  }
+  .daysNumber{
+    font-size: 0.25rem;
+  }
+  .text{
+    font-size: 0.2rem;
+    margin-right: 0.3rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.3rem;
+  }
+  .bookmarkBtn{
+    width: 100%;
+    height: 35%;
+    margin-top: 0.5rem;
+  }
+  .IconContainer{
+    width: 40%;
+  }
+  .profile{
+    padding: 0.1rem 0.1rem;
+  }
+  .profile_title{
+    font-size: 0.4rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 0.9em;
+    height: 0.9em;
+  }
+}
+
+
+
+@media (min-width: 500px){
+  .boxHeight{
+    height: 4rem;
+  }
+  .daysWeek{
+    font-size: 0.3rem;
+  }
+  .day{
+    font-size: 0.3rem;
+  }
+  .daysNumber{
+    font-size: 0.35rem;
+  }
+  .text{
+    font-size: 0.3rem;
+    margin-right: 0.3rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.3rem;
+  }
+  .bookmarkBtn{
+    width: 100%;
+    height: 60%;
+    margin-top: -0.2rem;
+  }
+  .IconContainer{
+    width: 40%;
+  }
+  .profile{
+    padding: 0.1rem 0.1rem;
+  }
+  .profile_title{
+    font-size: 0.4rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+}
+
+@media (min-width: 650px){
+  .boxHeight{
+    height: 4rem;
+  }
+  .daysWeek{
+    font-size: 0.3rem;
+  }
+  .day{
+    font-size: 0.3rem;
+  }
+  .daysNumber{
+    font-size: 0.35rem;
+  }
+  .text{
+    font-size: 0.3rem;
+    margin-right: 0.3rem;
+  }
+  .bookmarkBtn{
+    width: 100%;
+    height: 50%;
+    margin-top: 0rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.3rem;
+  }
+  .IconContainer{
+    width: 40%;
+  }
+  .profile{
+    padding: 0.1rem 0.1rem;
+  }
+  .profile_title{
+    font-size: 0.4rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 0.9em;
+    height: 0.9em;
+  }
+}
+
+@media (min-width: 786px){
+  .boxHeight{
+    height: 4.5rem;
+  }
+  .daysWeek{
+    font-size: 0.7rem;
+  }
+  .day{
+    font-size: 0.3rem;
+  }
+  .daysNumber{
+    font-size: 0.3rem;
+  }
+  .text{
+    font-size: 0.3rem;
+    margin-right: 0.2rem;
+  }
+  .eventsDetailsOnBox{
+    margin-bottom: 0.35rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.3rem;
+  }
+  .bookmarkBtn{
+    width: 70%;
+    height: 40%;
+    margin-top: -0.2rem;
+  }
+  .IconContainer{
+    width: 50%;
+  }
+  .profile{
+    padding: 0.1rem 0.1rem;
+  }
+  .profile_title{
+    font-size: 0.4rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 0.9em;
+    height: 0.9em;
+  }
+}
+
+@media (min-width: 900px){
+  .boxHeight{
+    height: 4rem;
+  }
+  .daysWeek{
+    font-size: 0.7rem;
+  }
+  .day{
+    font-size: 0.4rem;
+  }
+  .daysNumber{
+    font-size: 0.35rem;
+  }
+  .text{
+    font-size: 0.35rem;
+    margin-right: 0.5rem;
+  }
+  .eventsDetailsOnBox{
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.35rem;
+  }
+  .bookmarkBtn{
+    width: 60%;
+    height: 55%;
+    margin-top: 0.1rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.3rem 0.3rem;
+  }
+  .profile_title{
+    font-size: 0.45rem;
+  }
+  .profile_para{
+    font-size: 0.4rem;
+  }
+  .hasEvents::before{
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (min-width: 1030px){
+  .boxHeight{
+    height: 4.7rem;
+  }
+  .daysWeek{
+    font-size: 0.7rem;
+  }
+  .day{
+    font-size: 0.5rem;
+  }
+  .daysNumber{
+    font-size: 0.5rem;
+  }
+  .text{
+    font-size: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .eventsDetailsOnBox{
+    margin-bottom: 1rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.4rem;
+  }
+  .bookmarkBtn{
+    width: 60%;
+    height: 40%;
+    margin-top: 0.3rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.5rem 0.7rem;
+  }
+  .profile_title{
+    font-size: 0.5rem;
+  }
+  .profile_para{
+    font-size: 0.5rem;
+  }
+  .hasEvents::before{
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+@media (min-width: 1250px){
+  .boxHeight{
+    height: 5.2rem;
+  }
+  .daysWeek{
+    font-size: 0.7rem;
+  }
+  .day{
+    font-size: 0.5rem;
+  }
+  .daysNumber{
+    font-size: 0.5rem;
+  }
+  
+  .text{
+    font-size: 0.4rem;
+    margin-right: 0.5rem;
+  }
+  .bookmarkBtn{
+    width: 55%;
+    height: 50%;
+    margin-top: 0.3rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.6rem 1rem;
+  }
+  .profile_title{
+    font-size: 0.7rem;
+  }
+  .profile_para{
+    font-size: 0.7rem;
+  }
+  .hasEvents::before{
+    width: 1.4em;
+    height: 1.4em;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .boxHeight{
+    height: 6rem;
+  }
+  .daysWeek{
+    font-size: 0.8rem;
+  }
+  .day{
+    font-size: 0.8rem;
+  }
+  .daysNumber{
+    font-size: 0.8rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.53rem;
+  }
+  .text{
+    font-size: 0.6rem;
+    margin-right: 0.5rem;
+  }
+  .bookmarkBtn{
+    width: 60%;
+    height: 35%;
+    margin-top: 1rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.6rem 1rem;
+  }
+  .profile_title{
+    font-size: 0.7rem;
+  }
+  .profile_para{
+    font-size: 0.7rem;
+  }
+  .hasEvents::before{
+    width: 1.4em;
+    height: 1.4em;
+  }
+}
+
+@media (min-width: 1600px){
+  .boxHeight{
+    height: 7rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 1900px) {
+  .boxHeight{
+    height: 8rem;
+  }
+  .daysWeek{
+    font-size: 1rem;
+  }
+  .day{
+    font-size: 0.9rem;
+  }
+  .daysNumber{
+    font-size: 1rem;
+  }
+  .text{
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 0.6rem;
+  }
+  .bookmarkBtn{
+    width: 50%;
+    height: 30%;
+    margin-top: 2.4rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.6rem 1rem;
+  }
+  .profile_title{
+    font-size: 0.8rem;
+  }
+  .profile_para{
+    font-size: 0.7rem;
+  }
+  .hasEvents::before{
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 2000px) {
+  .boxHeight{
+    height: 10rem;
+  }
+  .daysWeek{
+    font-size: 1rem;
+  }
+  .day{
+    font-size: 0.9rem;
+  }
+  .daysNumber{
+    font-size: 1rem;
+  }
+  .text{
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .eventsDetailsOnBox_text{
+    font-size: 1.2rem;
+  }
+  .bookmarkBtn{
+    width: 55%;
+    height: 30%;
+    margin-top: 3.8rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+  .profile{
+    padding: 0.6rem 1rem;
+  }
+  
+  .profile_title{
+    font-size: 0.8rem;
+  }
+  .profile_para{
+    font-size: 1rem;
+  }
+  .hasEvents::before{
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+@media (min-width: 2500px) {
+  .boxHeight{
+    height: 10.5rem;
+  }
+  .daysWeek{
+    font-size: 1.1rem;
+  }
+  .day{
+    font-size: 1rem;
+  }
+  .daysNumber{
+    font-size: 1.1rem;
+  }
+  .text{
+    font-size: 0.8rem;
+    margin-right: 0.7rem;
+  }
+}
+
+@media (min-width: 3000px) {
+  .boxHeight{
+    height: 16.5rem;
+  }
+  .daysWeek{
+    font-size: 2.1rem;
+  }
+  .day{
+    font-size: 1.7rem;
+  }
+  .daysNumber{
+    font-size: 1.7rem;
+  }
+  .text{
+    font-size: 1.2rem;
+    width: 50%;
+    margin-right: 2rem;
+  }
+  .bookmarkBtn{
+    width: 60%;
+    height: 30%;
+    margin-top: 7rem;
+  }
+  .IconContainer{
+    width: 30%;
+  }
+}
+
+
+

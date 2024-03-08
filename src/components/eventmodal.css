@@ -1,93 +1,157 @@
-/* eventmodal.css */
- 
-/* Common styles for overlay and content */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+.modal-content {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  border-radius: 10px;
+}
+
+.modal-content-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-cross{
+  font-size: 0.6rem;
+}
+
+.visible{
+  width: 20%;
+  
+}
+
+.modal-content_title{
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.modal-events-details{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 1rem;
+  margin-top: 1rem;
+  height: 100%;
+}
+
+.modal-data{
+  display: flex;
+  flex-direction: column;
+  background-color: #dddddd;
+  align-items: left;
+  width: 100%;
+}
+
+.modal-data-title{
+  font-weight: 600;
+}
+
+.card {
+  --border-radius: 10px;
+  --primary-color: #ff9500;
+  --secondary-color: #404040;
+  width: 100%;
+  font-family: "Arial";
+  padding: 1.3rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  background: #dedede;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.202);
+  position: relative;
+  
+}
+
+.card > * + * {
+  margin-top: 0.2rem;
+}
+
+.card .card__content {
+  color: var(--secondary-color);
+  font-size: 0.6rem;
+  font-weight: 600;
+}
+
+.card .card__title {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+
+}
+
+.card .card__date {
+  color: #272727;
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.card .card__arrow {
+  position: absolute;
+  background: var(--primary-color);
+  padding: 0.1rem;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  bottom: 0;
+  right: 0;
+  transition: 0.2s;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
- 
-.modal-content {
-  position: fixed;
-  background-color: white;
-  border: 2px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+
+.card__arrow_click{
+  color: rgb(255, 255, 255);
+  font-size: 0.45rem;
 }
- 
-/* Styles for larger screens */
-@media screen and (min-width: 600px) {
-  .modal-content {
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 1000px;
-  }
- 
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    background: none;
-    border: none;
-    outline: none;
-  }
- 
-  /* Additional styles */
-  .search {
-    border-radius: 15px;
-    margin-right: 15em;
-    padding-right: 13em;
-  }
+
+.card svg {
+  transition: 0.2s;
+  height: 15px;
+  width: 15px;
 }
- 
-/* Styles for smaller screens */
-@media screen and (max-width: 599px) {
-  .modal-content {
-    top: 10%;
-    left: 10%;
-    right: 10%;
-    transform: none;
-    width: auto;
-    max-width: none;
-  }
- 
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    background: none;
-    border: none;
-    outline: none;
-  }
- 
-  /* Additional styles */
-  .search {
-    border-radius: 15px;
-    margin-right: 1em;
-    padding-right: 1em;
-  }
+
+/* hover */
+.card:hover .card__title {
+  color: var(--primary-color);
+}
+
+.card:hover .card__arrow{
+  color: white;
+  background: #111;
+}
+
+.card:hover .card__arrow_click{
+  color: white;
+}
+
+.card:hover .card__arrow svg .card__arrow_click{
+  transform: translateX(3px);
+  color: white;
+
+}
+
+.acceptButton {
+  padding: 11px 20px;
+  background-color: #eee9ff;
+  transition-duration: .2s;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.acceptButton:hover {
+  background-color: #714aff;
+  transition-duration: .2s;
 }
  
 .apply-button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #ffc609;
+  color: rgb(0, 0, 0);
   border: none;
-  padding: 8px 16px;
+  padding: 8px 26px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -122,7 +186,545 @@
  
 .table-container {
   max-height: 400px;
-  overflow-y: auto;
 }
- 
- 
+
+@media (max-width: 500px){
+  .visible{
+    width: 60%;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
+}
+
+@media (min-width: 100px){
+  .card{
+    padding: 0.3rem;
+    border-radius: 2px;
+  }
+  .modal-events-details{
+    gap: 1.5rem;
+  }
+  .modal-content_title{
+    font-size: 0.4rem;
+  }
+  .card .card__content{
+    font-size: 0.3rem;
+  } 
+  .card .card__title{
+    font-size: 0.3rem;
+  }
+  .card .card__date {
+    font-size: 0.3rem;
+  }
+  .modal-cross{
+    font-size: 0.4rem;
+  }
+  .card .card__arrow{
+    padding: 0.1rem;
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 2px
+  }
+  .card__arrow_click{
+    font-size: 0.28rem;
+  }
+  .card svg{
+    height: 6px;
+    width: 6px;
+  }
+}
+
+@media (min-width: 300px){
+  .card{
+    padding: 0.3rem;
+    border-radius: 2px;
+  }
+  .modal-events-details{
+    gap: 1.5rem;
+  }
+  .modal-content_title{
+    font-size: 0.5rem;
+  }
+  .card .card__content{
+    font-size: 0.4rem;
+  } 
+  .card .card__title{
+    font-size: 0.4rem;
+  }
+  .card .card__date {
+    font-size: 0.4rem;
+  }
+  .modal-cross{
+    font-size: 0.4rem;
+  }
+  .card .card__arrow{
+    padding: 0rem;
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 2px
+  }
+  .card__arrow_click{
+    font-size: 0.28rem;
+  }
+  .card svg{
+    height: 6px;
+    width: 6px;
+  }
+}
+
+@media (min-width: 500px){
+  .visible{
+    width: 20%;
+  }
+  .card{
+    padding: 0.3rem;
+    border-radius: 2px;
+  }
+  .modal-events-details{
+    gap: 1.5rem;
+  }
+  .modal-content_title{
+    font-size: 0.4rem;
+  }
+  .card .card__content{
+    font-size: 0.23rem;
+  } 
+  .card .card__title{
+    font-size: 0.23rem;
+  }
+  .card .card__date {
+    font-size: 0.23rem;
+  }
+  .modal-cross{
+    font-size: 0.3rem;
+  }
+  .card .card__arrow{
+    padding: 0rem;
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 2px
+  }
+  
+  .card__arrow_click{
+    font-size: 0.28rem;
+  }
+  .card svg{
+    height: 6px;
+    width: 6px;
+  }
+}
+
+@media (min-width: 650px){
+  .card{
+    padding: 0.5rem;
+  }
+  .modal-events-details{
+    gap: 3rem;
+  }
+  .modal-content_title{
+    font-size: 0.4rem;
+  }
+  .card .card__content{
+    font-size: 0.3rem;
+  } 
+  .card .card__title{
+    font-size: 0.3rem;
+  }
+  .card .card__date {
+    font-size: 0.3rem;
+  }
+  .modal-cross{
+    font-size: 0.4rem;
+  }
+  .card .card__arrow{
+    padding: 0rem;
+  }
+  .card__arrow_click{
+    font-size: 0.28rem;
+  }
+  .card svg{
+    height: 6px;
+    width: 6px;
+  }
+}
+
+@media (min-width: 786px){
+  .visible{
+    width: 15%;
+  }
+  .card{
+    padding: 0.5rem;
+  }
+  .modal-events-details{
+    gap: 2rem;
+  }
+  .modal-content_title{
+    font-size: 0.3rem;
+  }
+  .card .card__content{
+    font-size: 0.28rem;
+  } 
+  .card .card__title{
+    font-size: 0.28rem;
+  }
+  .card .card__date {
+    font-size: 0.28rem;
+  }
+  .modal-cross{
+    font-size: 0.3rem;
+  }
+  .card .card__arrow{
+    padding: 0rem;
+  }
+  .card__arrow_click{
+    font-size: 0.28rem;
+  }
+  .card svg{
+    height: 6px;
+    width: 6px;
+  }
+}
+
+@media (min-width: 900px){
+  .visible{
+    width: 18.5%;
+  }
+  .card{
+    padding: 1.2rem;
+  }
+  .modal-events-details{
+    gap: 1.2rem;
+  }
+  .modal-content_title{
+    font-size: 0.4rem;
+  }
+  .card .card__content{
+    font-size: 0.38rem;
+  } 
+  .card .card__title{
+    font-size: 0.38rem;
+  }
+  .card .card__date {
+    font-size: 0.38rem;
+  }
+  .modal-cross{
+    font-size: 0.4rem;
+  }
+  .card .card__arrow{
+    padding: 0.1rem;
+  }
+  .card__arrow_click{
+    font-size: 0.3rem;
+  }
+}
+
+@media (min-width: 978px){
+  .visible{
+    width: 18.5%;
+  }
+  .card{
+    padding: 1.2rem;
+  }
+  .modal-events-details{
+    gap: 1.2rem;
+  }
+  .modal-content_title{
+    font-size: 0.45rem;
+  }
+  .card .card__content{
+    font-size: 0.4rem;
+  } 
+  .card .card__title{
+    font-size: 0.4rem;
+  }
+  .card .card__date {
+    font-size: 0.4rem;
+  }
+  .modal-cross{
+    font-size: 0.5rem;
+  }
+  .card .card__arrow{
+    padding: 0.1rem;
+  }
+  .card__arrow_click{
+    font-size: 0.4rem;
+  }
+}
+
+@media (min-width: 1030px){
+  .card{
+    padding: 1rem;
+  }
+  .modal-events-details{
+    gap: 1.2rem;
+  }
+  .modal-content_title{
+    font-size: 0.55rem;
+  }
+  .card .card__content{
+    font-size: 0.48rem;
+  } 
+  .card .card__title{
+    font-size: 0.48rem;
+  }
+  .card .card__date {
+    font-size: 0.47rem;
+  }
+  .modal-cross{
+    font-size: 0.5rem;
+  }
+  .card .card__arrow{
+    padding: 0.1rem;
+  }
+  .card__arrow_click{
+    font-size: 0.35rem;
+  }
+}
+
+@media (min-width: 1250px){
+  .visible{
+    width: 19%;
+  }
+  .card{
+    padding: 1.3rem;
+  }
+  .modal-events-details{
+    gap: 1rem;
+  }
+  .modal-content_title{
+    font-size: 0.55rem;
+  }
+  .card .card__content{
+    font-size: 0.4rem;
+  } 
+  .card .card__title{
+    font-size: 0.45rem;
+  }
+  .card .card__date {
+    font-size: 0.45rem;
+  }
+  .modal-cross{
+    font-size: 0.55rem;
+  }
+  .card .card__arrow{
+    padding: 0.15rem;
+  }
+  .card__arrow_click{
+    font-size: 0.4rem;
+  }
+}
+
+@media (min-width: 1200px){
+  .visible{
+    width: 20%;
+  }
+  .modal-content_title{
+    font-size: 0.6rem;
+  }
+  .card .card__content{
+    font-size: 0.5rem;
+  } 
+  .card .card__title{
+    font-size: 0.5rem;
+  }
+  .card .card__date {
+    font-size: 0.5rem;
+  }
+  .modal-cross{
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 1400px){
+  .visible{
+    width: 18%;
+  }
+  .card{
+    padding: 1.2rem;
+  }
+  .modal-events-details{
+    gap: 3rem;
+  }
+  .modal-content_title{
+    font-size: 0.8rem;
+  }
+  .card .card__content{
+    font-size: 0.7rem;
+  } 
+  .card .card__title{
+    font-size: 0.7rem;
+  }
+  .card .card__date {
+    font-size: 0.7rem;
+  }
+  .card .card__arrow{
+    padding: 0.10rem;
+  }
+  .card__arrow_click{
+    font-size: 0.6rem;
+  }
+  .modal-cross{
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1600px){
+  .card{
+    padding: 1.6rem;
+  }
+  .modal-events-details{
+    gap: 2rem;
+  }
+  .visible{
+    width: 20%;
+  }
+  .modal-content_title{
+    font-size: 1rem;
+  }
+  .card .card__content{
+    font-size: 0.8rem;
+  } 
+  .card .card__title{
+    font-size: 0.7rem;
+  }
+  .card .card__date {
+    font-size: 0.7rem;
+  }
+  .card .card__arrow{
+    padding: 0.5rem;
+  }
+  .card__arrow_click{
+    font-size: 0.6rem;
+  }
+
+  .modal-cross{
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1900px){
+  .card{
+    padding: 2rem;
+  }
+  .modal-events-details{
+    gap: 2rem;
+  }
+  .visible{
+    width: 20%;
+  }
+  .modal-content_title{
+    font-size: 1rem;
+  }
+  .card .card__content{
+    font-size: 0.9rem;
+  } 
+  .card .card__title{
+    font-size: 0.9rem;
+  }
+  .card .card__date {
+    font-size: 0.8rem;
+  }
+  .card .card__arrow{
+    padding: 0.7rem;
+  }
+  .card__arrow_click{
+    font-size: 0.7rem;
+  }
+
+  .modal-cross{
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 2000px) {
+  .card{
+    padding: 3rem;
+  }
+  .modal-events-details{
+    gap: 2rem;
+  }
+  .visible{
+    width: 20%;
+  }
+  .modal-content_title{
+    font-size: 1.3rem;
+  }
+  .card .card__content{
+    font-size: 1.2rem;
+  } 
+  .card .card__title{
+    font-size: 1.2rem;
+  }
+  .card .card__date {
+    font-size: 1.1rem;
+  }
+  .card .card__arrow{
+    padding: 0.8rem;
+  }
+  .card__arrow_click{
+    font-size: 0.9rem;
+  }
+
+  .modal-cross{
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 2500px) {
+  .card{
+    padding: 3rem;
+  }
+
+  .modal-events-details{
+    gap: 4rem;
+  }
+  .modal-content_title{
+    font-size: 1.5rem;
+  }
+  .card .card__content{
+    font-size: 1.3rem;
+  } 
+  .card .card__title{
+    font-size: 1.2rem;
+  }
+  .card .card__date {
+    font-size: 1rem;
+  }
+  .card .card__arrow{
+    padding: 0.8rem;
+  }
+  .card__arrow_click{
+    font-size: 1rem;
+  }
+}
+
+
+@media (min-width: 3000px){
+  .card{
+    padding: 4rem;
+  }
+
+  .modal-events-details{
+    gap: 3rem;
+  }
+  .modal-content_title{
+    font-size: 1.8rem;
+  }
+  .card .card__content{
+    font-size: 1.5rem;
+  } 
+  .card .card__title{
+    font-size: 1.8rem;
+  }
+  .card .card__date {
+    font-size: 1.4rem;
+  }
+  .card .card__arrow{
+    padding: 1.3rem;
+  }
+  .card__arrow_click{
+    font-size: 1.4rem;
+  }
+  .modal-cross{
+    font-size: 2.5rem;
+  }
+}
