@@ -82,8 +82,6 @@ const Sidebar = () => {
       <option key={value} value={value}>{value}</option>
     ));
   }
-
-
   
   const renderTable = () => {
     return (
@@ -147,7 +145,6 @@ const Sidebar = () => {
       </div>
     );
   };
-
 
   return (
     <>

@@ -229,6 +229,23 @@
   width: 420px;
 }
 
+select.formControlPractice {  
+  width: 8rem !important;   
+  height: 1.2rem !important;  
+  border-radius: 4px;
+  margin-left: 2rem;
+  padding: 0 0 0 0.6rem;
+  background-color: #ffffff;  
+  border: none;  
+  outline: none;
+  font-size: 0.4rem;  
+}  
+  
+select.formControlPractice:focus{  
+  outline: none !important;  
+  border: none !important;
+} 
+
 @media (min-width: 100px){
   .header-row-1 {
     height: 45px;

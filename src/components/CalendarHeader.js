@@ -8,14 +8,17 @@ import GlobalContext from "../context/GlobalContext";
 import "./eventmodal.css";
 import "./modalcontainer.css";
 import CourseDetailsModal from "./CourseDetailsModal";
+import axios from "axios";
+
 
 const CourseSearch = () => {
-  const { monthIndex, setMonthIndex } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, selectedDropValue, setSelectedDropValue } = useContext(GlobalContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedCourseDetails, setSelectedCourseDetails] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [dropDownData, setDropDown] = useState([]);
+  
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
@@ -30,7 +33,8 @@ const CourseSearch = () => {
           return response.json();
         })
         .then((data) => {
-          setSearchResults(data.Table1);
+          const searchedData = data.Table1;
+          setSearchResults(searchedData);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -39,6 +43,15 @@ const CourseSearch = () => {
     return () => clearTimeout(timeout); 
 
   }, [searchTerm]);
+
+
+  useEffect(()=>{
+    const url = 'https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw'
+    axios.get(url).then(response=> {
+      const profileDropDownData = response.data.Table1;
+      setDropDown(profileDropDownData);
+    })
+  })
 
   const handlePrevMonth = () => {
     setMonthIndex(monthIndex - 1);
@@ -78,6 +91,16 @@ const CourseSearch = () => {
     setIsModalOpen(false);
     setSelectedCourseDetails(null);
   };
+
+  const handleDropdownChange = (event) => {  
+    setSelectedDropValue(event.target.value);  
+  };
+
+  function renderOptions(uniqueValues) {
+    return uniqueValues.map(value => (
+      <option value={value} className="formControlPractice_option">{value}</option>
+    ));
+  }
 
   return (
     <header className="Main-header">
@@ -144,7 +167,14 @@ const CourseSearch = () => {
             }}
           />
         )}
+        <div className="form-group">  
+          <select value={selectedDropValue} onChange={handleDropdownChange} className='formControlPractice'>  
+            <option value="">Select your practice</option>  
+            {renderOptions([...new Set(dropDownData.map(result => result.source))])}
+          </select>  
+        </div> 
       </div>
+       
     </header>
   );
 };

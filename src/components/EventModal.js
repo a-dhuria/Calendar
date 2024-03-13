@@ -4,7 +4,6 @@ import GlobalContext from "../context/GlobalContext";
 import axios from "axios";
 import LinearProgress from '@mui/material-next/LinearProgress';
 
-
 export default function EventModal() {
   const {daySelected, showEventModal, setShowEventModal } = useContext(GlobalContext);
   const [eventsForSelectedDay, setEventsForSelectedDay] = useState([]);
@@ -110,6 +109,7 @@ export default function EventModal() {
                 <h3 className="card__title">{event.courseName}</h3>
                 <p className="card__content">{`From ${convertTimeToLocale(event.startTime)} to ${convertTimeToLocale(event.endTime)}`}</p>
                 <div className="card__date">{`Starts from ${formatDate(event.startProgramDates)}`}</div>
+                {console.log("At EventModal", event)}
                 {event.registrationLink ? (
                   <div className="card__arrow">
                     <p className="card__arrow_click" onClick={() => RedirectToPage(event.registrationLink)}>Register Now</p>

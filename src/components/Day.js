@@ -8,7 +8,7 @@ import GlobalContext from "../context/GlobalContext";
 import './day.css';
  
 export default function Day({ day, rowIdx }) {
-  const { setDaySelected, setShowEventModal, daySelected, showEventModal} = useContext(GlobalContext);
+  const { setDaySelected, setShowEventModal, daySelected, selectedDropValue} = useContext(GlobalContext);
   const [eventsCountandDate, setEventsCountandDate] = useState([]);
  
   const countAndOrganizeEvents = (eventData) => {
@@ -24,7 +24,6 @@ export default function Day({ day, rowIdx }) {
         coursesByDate[formattedDate].courses.push({ courseName, startProgramDates, endProgramDates, startTime, endTime, format });
       }
     });
- 
     const coursesCountByDate = Object.entries(coursesByDate).map(([date, { courses }]) => ({
       date,
       courseCount: courses.length,
@@ -37,19 +36,24 @@ export default function Day({ day, rowIdx }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw');
+        let url;
+        if (selectedDropValue) {
+          url = `https://prod-17.eastus.logic.azure.com/workflows/631fa072cd384239afcdfbc82e0e16da/triggers/manual/paths/invoke/coursecountbydatewithfilter/${selectedDropValue}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZcIrZZDvWhebpn2VR4Cc95aoxnkpMkEfujgiqPGDHF4`;
+        } else {
+          url = 'https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw';
+        }
+        const response = await axios.get(url);
         const eventData = response.data.Table1;
         countAndOrganizeEvents(eventData);
       } catch (error) {
         console.error('Unable to fetch events count and details', error);
       }
     };
- 
     if (daySelected) {
       fetchData();
     }
-  }, [daySelected]);
- 
+  }, [daySelected, selectedDropValue]);
+
   function handleShowEventModal(eventDate) {
     const currentDate = dayjs();
     const isBiggerOrLarger = currentDate.isBefore(eventDate)
@@ -83,6 +87,12 @@ export default function Day({ day, rowIdx }) {
   //   ) : null;
   // }
 
+  function RedirectToPage(url){
+    if(url){
+      window.location.href = url;
+    }
+  }
+
   function getEventDetails(){
     const formattedDay = day.format("DD-MM-YYYY");
     const eventsOnDay = eventsCountandDate.find(evt => evt.date === formattedDay);
@@ -91,7 +101,8 @@ export default function Day({ day, rowIdx }) {
         {eventsOnDay.courses.map((course) => {
           return (
             <div className="force-overflow">
-              <p className="eventsDetailsOnBox_text">{course.courseName}</p>
+              {console.log("At Day.js", course)}
+              <p className="eventsDetailsOnBox_text" onClick={()=> RedirectToPage(course)}>{course.courseName}</p>
             </div>
           )
         })}
@@ -139,18 +150,18 @@ export default function Day({ day, rowIdx }) {
   return (
     <Grid item className="boxHeight">
       <Tooltip title={(getHoveredEventDetails())} placement="bottom-end" arrow enterDelay={3000} leaveDelay={1} >
-        <div className={`border border-gray-200 flex flex-col calendarbox tooltip ${getCurrentDayClass()} ${hasEventsOnDay}`} onClick={() => { setDaySelected(day); handleShowEventModal(day)}}>
-          {rowIdx === 0 && (
-            <p className="text-slate-950 day text-center bg-personal daysWeek">
-              {day.format("ddd").toUpperCase()}
-            </p>
-          )}
-          <div className="flex flex-col">
-            <p className={`text-base p-1 my-1 text-center daysNumber`}>{day.format("DD")}</p>
+          <div className={`border border-gray-200 flex flex-col calendarbox tooltip ${getCurrentDayClass()} ${hasEventsOnDay}`} onClick={() => { setDaySelected(day); handleShowEventModal(day)}}>
+            {rowIdx === 0 && (
+              <p className="text-slate-950 day text-center bg-personal daysWeek">
+                {day.format("ddd").toUpperCase()}
+              </p>
+            )}
+            <div className="flex flex-col">
+              <p className={`text-base p-1 my-1 text-center daysNumber`}>{day.format("DD")}</p>
+            </div>
+            {getEventDetails()}
           </div>
-          {getEventDetails()}
-        </div>
       </Tooltip>
-    </Grid>
+    </Grid> 
   );
 }
