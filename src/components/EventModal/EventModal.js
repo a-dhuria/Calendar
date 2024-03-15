@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import dayjs from "dayjs";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 import axios from "axios";
 import LinearProgress from '@mui/material-next/LinearProgress';
-
 
 export default function EventModal() {
   const {daySelected, showEventModal, setShowEventModal } = useContext(GlobalContext);
@@ -95,7 +94,6 @@ export default function EventModal() {
 
   return (
     <div className={`${showEventModal ? "visible" : "hidden"}`}>
-      {console.log("Inside EventModal",showEventModal)}
       <div className="modal-content">
         <div className="modal-content-header">
           <h2 className="modal-content_title"><b>Events for  {daySelected ? formatDate(daySelected.format("DD-MM-YYYY")) : ''}</b></h2>

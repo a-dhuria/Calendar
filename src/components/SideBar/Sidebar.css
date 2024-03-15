@@ -525,10 +525,13 @@ select.form-control:focus{
   }
 }
 
-@media (min-width: 300px){
+@media (max-width: 300px){
   .sidebar{
     width: 15%;
     justify-content: flex-start;
+  }
+  .modal{
+    width: 100%;
   }
   .alert{
     padding: 0.25rem;
@@ -564,7 +567,7 @@ select.form-control:focus{
     width: 100%;
   }
   .hamburger-menu:has(input:checked) + .sidebar {
-    translate: 0
+    translate: 0;
   }
   .hamburger-menu{
     z-index:12;

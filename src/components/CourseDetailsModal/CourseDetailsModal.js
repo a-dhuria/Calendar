@@ -1,4 +1,4 @@
-import ModalContainer from "./Modalcontainer";
+import ModalContainer from "../ModalContainer/Modalcontainer";
 import "./CourseDetailsModal.css"
 
 const CourseDetailsModal = ({ courseDetails, onClose, onApplyClick }) => {

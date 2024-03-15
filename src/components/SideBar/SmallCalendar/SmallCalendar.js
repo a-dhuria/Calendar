@@ -2,10 +2,10 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
-import GlobalContext from "../context/GlobalContext";
-import { getMonth } from "../util";
-import './smallcalendar.css';
-import ModalContainer from './Modalcontainer';
+import GlobalContext from "../../../context/GlobalContext";
+import { getMonth } from "../../../util";
+import './SmallCalendar.css';
+import ModalContainer from '../../ModalContainer/Modalcontainer';
 
 export default function SmallCalendar() {
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
