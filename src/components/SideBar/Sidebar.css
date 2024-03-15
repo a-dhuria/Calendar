@@ -525,7 +525,7 @@ select.form-control:focus{
   }
 }
 
-@media (min-width: 300px){
+@media (max-width: 300px){
   .sidebar{
     width: 15%;
     justify-content: flex-start;

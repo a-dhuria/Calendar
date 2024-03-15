@@ -1,14 +1,13 @@
 import React, { useState} from "react";
-import SmallCalendar from "./SmallCalendar";
+import SmallCalendar from "./SmallCalendar/SmallCalendar";
 import "./Sidebar.css";
 import 'datatables.net-select';
-import Row from "./Row";
+import Row from "./Row/Row";
 
 const Sidebar = () => {
   const [calendarData, setCalendarData] = useState();
   const [activeModal, setActiveModal] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  // const [filterAbleData, setFilterAbleData] = useState();
   const [activeData, setActiveData] = useState();
 
   const handleCalendarViewClick = async () => {

@@ -256,8 +256,11 @@ color: #888;
   font-weight: 700;
 }
 
-.eventsDetailsOnBox_text:hover{
+.isClickableEvent:hover{
   color: #ff9500;
+}
+
+.eventsDetailsOnBox_text:hover{
 }
 
 .IconContainer {

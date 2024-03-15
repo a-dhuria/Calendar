@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import dayjs from "dayjs";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 import axios from "axios";
 import LinearProgress from '@mui/material-next/LinearProgress';
 
@@ -94,7 +94,6 @@ export default function EventModal() {
 
   return (
     <div className={`${showEventModal ? "visible" : "hidden"}`}>
-      {console.log("Inside EventModal",showEventModal)}
       <div className="modal-content">
         <div className="modal-content-header">
           <h2 className="modal-content_title"><b>Events for  {daySelected ? formatDate(daySelected.format("DD-MM-YYYY")) : ''}</b></h2>
@@ -109,7 +108,6 @@ export default function EventModal() {
                 <h3 className="card__title">{event.courseName}</h3>
                 <p className="card__content">{`From ${convertTimeToLocale(event.startTime)} to ${convertTimeToLocale(event.endTime)}`}</p>
                 <div className="card__date">{`Starts from ${formatDate(event.startProgramDates)}`}</div>
-                {console.log("At EventModal", event)}
                 {event.registrationLink ? (
                   <div className="card__arrow">
                     <p className="card__arrow_click" onClick={() => RedirectToPage(event.registrationLink)}>Register Now</p>
