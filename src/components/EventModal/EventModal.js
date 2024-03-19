@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import dayjs from "dayjs";
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../Context/GlobalContext";
 import axios from "axios";
 import LinearProgress from '@mui/material-next/LinearProgress';
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../Context/GlobalContext";
 import './Day.css';
 
 export default function Day({ day, rowIdx }) {
@@ -30,6 +30,7 @@ export default function Day({ day, rowIdx }) {
       courses,
     }));
     setEventsCountandDate(coursesCountByDate);
+    // console.log("At DAY.JS", eventsCountandDate)
   };
  
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Day({ day, rowIdx }) {
         }
         const response = await axios.get(url);
         const eventData = response.data.Table1;
-        console.log("This at the top", eventData)
+        console.log(eventData)
         countAndOrganizeEvents(eventData);
       } catch (error) {
         console.error('Unable to fetch events count and details', error);
