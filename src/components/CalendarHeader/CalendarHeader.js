@@ -1,14 +1,15 @@
-// CourseSearch.js
 import React, { useState, useEffect, useContext } from "react";
 import "./CalendarHeader.css";
 import dayjs from "dayjs";
 import logo from "../../assets/logo-pwc-white-2x.png";
 import banner from "../../assets/Cloud Academy - Internal header banner.png"
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../Context/GlobalContext";
 import "../EventModal/EventModal.css";
 import "../ModalContainer/ModalContainer.css";
 import CourseDetailsModal from "../CourseDetailsModal/CourseDetailsModal";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"
+
 
 const CourseSearch = () => {
   const { monthIndex, setMonthIndex, selectedDropValue, setSelectedDropValue } = useContext(GlobalContext);
@@ -52,43 +53,6 @@ const CourseSearch = () => {
       setDropDown(profileDropDownData);
     })
   })
-
-
-  // const handleClick = () => {
-  //   setIsLoading(true);
-
-  //   // Data to be posted to the API
-  //   const postData = {
-  //     // Define your data here
-  //     // Example: key: value
-  //   };
-
-  //   fetch('https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(postData)
-  //   })
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     // Handle the response from the API
-  //     console.log('API response:', data);
-  //     // You can perform any further actions based on the response here
-  //   })
-  //   .catch(error => {
-  //     // Handle errors
-  //     console.error('There was a problem with the fetch operation:', error);
-  //   })
-  //   .finally(() => {
-  //     setIsLoading(false);
-  //   });
-  // };
 
   const handlePrevMonth = () => {
     setMonthIndex(monthIndex - 1);
@@ -138,6 +102,8 @@ const CourseSearch = () => {
       <option value={value} className="formControlPractice_option">{value}</option>
     ));
   }
+
+  const navigate = useNavigate();
 
   return (
     <header className="Main-header">
@@ -211,7 +177,10 @@ const CourseSearch = () => {
           </select>  
         </div> 
         <div className="form-group">  
-          <button className="button-calendar-today">Add events</button> 
+          <button className="button-calendar-today" onClick={() => navigate("/addEvents")}>Add events</button> 
+        </div> 
+        <div className="form-group">  
+          <button className="button-calendar-today" onClick={() => navigate("/editdeletedata")}>Edit or Delete Events</button> 
         </div> 
       </div>
        

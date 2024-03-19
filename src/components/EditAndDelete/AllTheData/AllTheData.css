@@ -1,0 +1,11 @@
+.table{
+    width: 100%;
+}
+
+.mainTable{
+    overflow-y: auto;
+}
+
+.mainTable_body{
+    overflow-y: auto;
+}

@@ -1,0 +1,93 @@
+.main {
+    height: 100vh;
+    border-radius: 15px;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    overflow-y: auto;
+    background-color: #f1f1f1;
+
+  }
+  
+  .main-form{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+  }
+  
+  .form-title {
+    color: #ff6a00;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  
+  .updateEvents-label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+    font-size: 0.6rem;
+  }
+  
+  #pass {
+    color: #ff6a00;
+    font-size: 12px;
+  }
+  
+  .updateEvents-input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.6rem;
+    outline: none;
+    border: none;
+
+  }
+
+  .updateEvents-input:focus{
+    outline: none;
+    border: none;
+
+  }
+  
+  .updateEvents-select {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.6rem;
+  }
+  
+  .updateEvents-Button {
+    padding: 2px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+
+    width: 100%;
+    font-size: 9px;
+  }
+  
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 2rem;
+    border-radius: 4px;
+    background-color: #ff6a00;
+  }
+  

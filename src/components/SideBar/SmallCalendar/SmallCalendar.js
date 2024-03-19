@@ -2,7 +2,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
-import GlobalContext from "../../../context/GlobalContext";
+import GlobalContext from "../../../Context/GlobalContext";
 import { getMonth } from "../../../util";
 import './SmallCalendar.css';
 import ModalContainer from '../../ModalContainer/Modalcontainer';

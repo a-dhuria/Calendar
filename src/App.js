@@ -1,12 +1,15 @@
 // src/App.js
 import React, { useState, useContext, useEffect } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
 import { getMonth } from "./util";
 import CalendarHeader from "./components/CalendarHeader/CalendarHeader";
 import Sidebar from "./components/SideBar/Sidebar";
 import Month from "./components/Month/Month";
-import GlobalContext from "./context/GlobalContext";
+import GlobalContext from "./Context/GlobalContext";
 import EventModal from "./components/EventModal/EventModal";
+import UpdateEventsForms from "./components/UpdateEventsForm/UpdateEventsForm";
+import EditAndDelete from "./components/EditAndDelete/EditAndDelete";
 
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
@@ -27,16 +30,25 @@ function App() {
   );
  
   return (
-    <React.Fragment>
-      <div className="overall">
-        <CalendarHeader />
-        <div className="main-content-area">
-          <Sidebar />
-          <Month month={currentMonth} />
-          <EventModal />
-        </div>
-      </div>
-    </React.Fragment>
+      <Router>
+        <Routes>
+          <Route exact path="/" element = {
+            <React.Fragment>
+              <div className="overall">
+                <CalendarHeader />
+                <div className="main-content-area">
+                  <Sidebar />
+                  <Month month={currentMonth} />
+                  <EventModal />
+                </div>
+              </div>
+            </React.Fragment>
+            }>
+          </Route>
+          <Route exact path="/addEvents" element={<UpdateEventsForms />}></Route>
+          <Route exact path="/editdeletedata" element={<EditAndDelete />}></Route>
+        </Routes>
+      </Router>
   );
 }
  
