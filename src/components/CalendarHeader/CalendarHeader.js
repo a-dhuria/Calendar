@@ -26,7 +26,7 @@ const CourseSearch = () => {
       return;
     }
     const timeout = setTimeout(() => {
-      fetch(`https://prod-38.eastus.logic.azure.com/workflows/0c11c630e7f94c878dce84caedb8bfea/triggers/manual/paths/invoke/coursedetails/${searchTerm}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lKEL-Wtl1jKEuHzyA6p82PecK5rwWCy47MpZj-l3BJY`)
+      fetch(`https://prod-77.eastus.logic.azure.com/workflows/d72d3eba845b41928582c8d6deb4cf53/triggers/When_a_HTTP_request_is_received/paths/invoke/coursedetails/${searchTerm}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=0aWgNhDsISOxIPh482nB4MXEdj8qUjnL7WJS7Nv3LcE`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -47,7 +47,7 @@ const CourseSearch = () => {
 
 
   useEffect(()=>{
-    const url = 'https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw'
+    const url = 'https://prod-33.eastus.logic.azure.com/workflows/5ecb6d8f908e4752991c3c23e16e39c5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YXSyfVCQ_CiACJRuAages-B-rTvCBsAadMFFTnN-FXY'
     axios.get(url).then(response=> {
       const profileDropDownData = response.data.Table1;
       setDropDown(profileDropDownData);

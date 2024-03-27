@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import './UpdateEventsForm.css'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 const UpdateEventsForms = () => {
   const [dropDownData, setDropDown] = useState([]);
@@ -22,7 +18,7 @@ const UpdateEventsForms = () => {
   const [formData, setFormData] = useState([]);
 
     useEffect(()=>{
-        const url = 'https://prod-62.eastus.logic.azure.com/workflows/f40390d3b1fe4001878fec9dc26af2cf/triggers/manual/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GrNkiypWxhQE0V55YgxxynDrncq4y89zXnT-M4H0U10'
+        const url = 'https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8'
         axios.get(url).then(response=> {
           const profileDropDownData = response.data.Table1;
           setDropDown(profileDropDownData);
@@ -44,7 +40,6 @@ const UpdateEventsForms = () => {
       let parts = startDate.split('-');  
       let convertedDate = parts[2] + '-' + parts[1] + '-' + parts[0];  
       setStartDate(convertedDate);  
-      // setStartDate(event.target.value)
     }
 
     const handleEndDate = (event) => {
@@ -56,6 +51,7 @@ const UpdateEventsForms = () => {
 
     const handleStartTime = (event) => {
       setStartTime(event.target.value);
+      console.log(startime)
     }
 
     const handleEndTime = (event) => {
@@ -70,7 +66,6 @@ const UpdateEventsForms = () => {
       setRegistration(event.target.value)
     }
 
-   
     const handleFormatChange = (event) => {
         const value = event.target.value;
         setSelectedFormat(value);
@@ -96,6 +91,7 @@ const UpdateEventsForms = () => {
     };
 
     const handleSubmit = (event) => {  
+      console.log('Handle Submit');
       event.preventDefault();  
       const updatedFormData = {  
         courseCount: 1,
@@ -111,8 +107,7 @@ const UpdateEventsForms = () => {
         targetAudience: selectedTA
       };  
       setFormData(updatedFormData);  
-      console.log("this is form Data", formData)
-      const url = 'https://prod-27.eastus.logic.azure.com/workflows/2ecc76e94d6e481699128b62542793aa/triggers/manual/paths/invoke/events?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=x2lUcardPo3l1znmvWoMsvgWP0nEQWVJydfoeM9fuMg';  
+      const url = 'https://prod-59.eastus.logic.azure.com/workflows/86e398e797a043a68664d2a13ec4c2e2/triggers/When_a_HTTP_request_is_received/paths/invoke/events?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=vwYw-4krIQFLmT7EQJPxjCfaVf5_Yx0hCaBRq4LN0pE';  
       axios.post(url, formData)
       .then(response => {
         console.log(response.data.Table1);
@@ -127,27 +122,17 @@ const UpdateEventsForms = () => {
           <h1 className="form-title">Add New Events</h1>
           <form action="" className="main-form" onSubmit={handleSubmit}>
             <label for="first" className="updateEvents-label">Source</label>
-            <input type="text" id="title" name="title" placeholder="Enter your Project Title" required value={source} className="updateEvents-input" onChange={handleSourceChange}/>
+            <input type="text" id="title" name="title" placeholder="Enter Source Name" required value={source} className="updateEvents-input" onChange={handleSourceChange}/>
             <label for="dob" className="updateEvents-label">Start Program Date</label>
             <input type="date" id="dob" name="dob" placeholder="Enter your PLD" required className="updateEvents-input" defaultValue={startDate} onChange={handleStartDate}/>
             <label for="dob" className="updateEvents-label">End Program Dates</label>
             <input type="date" id="dob" name="dob" placeholder="Enter your PLD" required className="updateEvents-input" defaultValue={endDate} onChange={handleEndDate}/>
             <label for="last" className="updateEvents-label">Start Time</label>
-            <input type="text" id="description" name="description" placeholder="Enter Description" required className="updateEvents-input" value={startime} onChange={handleStartTime}/>
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['TimePicker', 'TimePicker']}>
-                <TimePicker label="Start Time" value={startime} onChange={handleStartTime}/>
-              </DemoContainer>
-            </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['TimePicker', 'TimePicker']}>
-                <TimePicker label="End Time" value={endTime} onChange={handleEndTime}/>
-              </DemoContainer>
-            </LocalizationProvider> */}
+            <input type="time" id="description" name="description" placeholder="Enter Description" required className="updateEvents-input" value={startime} onChange={handleStartTime}/>
             <label for="last" className="updateEvents-label">End Time</label>
-            <input type="text" id="description" name="description" placeholder="Enter Description" required className="updateEvents-input" value={endTime} onChange={handleEndTime}/>
+            <input type="time" id="description" name="description" placeholder="Enter Description" required className="updateEvents-input" value={endTime} onChange={handleEndTime}/>
             <label for="last" className="updateEvents-label">Course Name</label>
-            <input type="text" id="objectives" name="objectives" placeholder="Learning Objective" required className="updateEvents-input" value={courseName} onChange={handleCourseName}/>
+            <input type="text" id="objectives" name="objectives" placeholder="Course Name" required className="updateEvents-input" value={courseName} onChange={handleCourseName}/>
             <label for="Target Audience" className="updateEvents-label">Target Audience​</label>
             <select id="Target Audience" name="Target Audience" value={selectedTA} onChange={handleTAChange} required className="updateEvents-select">
                 {renderRandomOptions([...new Set(dropDownData.map(result => result.targetAudience))])}
@@ -183,7 +168,7 @@ const UpdateEventsForms = () => {
                 />
             )}
             <label for="last" className="updateEvents-label">Registration Link</label>
-            <input type="text" id="duration" name="duration" placeholder="Enter Duration" required className="updateEvents-input" value={registration} onChange={handleRegistration}/>
+            <input type="url" id="duration" name="duration" placeholder="Enter the Linl" required className="updateEvents-input" value={registration} onChange={handleRegistration}/>
             <div className="wrap">
               <button type="submit" onClick={handleSubmit}  className="updateEvents-Button">
                 Submit 

@@ -8,17 +8,10 @@
 
   }
   
-  .main-form{
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; */
-  }
-  
   .form-title {
     color: #ff6a00;
     font-size: 1rem;
-    font-weight: 800;
+    font-weight: 600;
   }
   
   .updateEvents-label {

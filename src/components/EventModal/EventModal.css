@@ -32,7 +32,9 @@
   align-items: left;
   gap: 1rem;
   margin-top: 1rem;
-  height: 100%;
+  height: 50%;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .modal-data{

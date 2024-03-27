@@ -6,13 +6,14 @@ const moment = require('moment');
 
 // MySQL database configuration
 const dbConfig = {
-  host:"gcalendar.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306, ssl:{ca:fs.readFileSync("C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\DigiCertGlobalRootCA.crt.pem")}
+  host:"globalcalender.mysql.database.azure.com", user:"GCal", password:"password@123", database:"calendar", port:3306, ssl:{ca:fs.readFileSync("C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\DigiCertGlobalRootCA.crt.pem")}
 };
 
 // var conn=mysql.createConnection({host:"gcalendar.mysql.database.azure.com", user:"GCal", password:"{your_password}", database:"{your_database}", port:3306, ssl:{ca:fs.readFileSync("{ca-cert filename}")}});
 
 // Path to your Excel file
-const excelFilePath = 'C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\Calendar.xlsx';
+// const excelFilePath = 'C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\Calendar.xlsx';
+const excelFilePath = 'C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\C&D training Calendar.xlsx';
 
 async function createConnection() {
   return await mysql.createConnection(dbConfig);

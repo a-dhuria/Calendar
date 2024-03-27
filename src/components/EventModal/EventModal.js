@@ -14,7 +14,7 @@ export default function EventModal() {
       setLoading(true);
       const formattedDate = daySelected.format("DD-MM-YYYY");
       const debounceTimeout = setTimeout(() => {
-        axios.get(`https://prod-18.eastus.logic.azure.com/workflows/1fc147fbd0994200825bfc4958b730f7/triggers/manual/paths/invoke/searchcourse/${formattedDate}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=xKUXOnyZPeNNJVLbjVjMG_F0_MfIxhuoaea84mggfrU`)
+        axios.get(`https://prod-51.eastus.logic.azure.com/workflows/7bea3ea57b854b52b39c933aeaac6d8a/triggers/When_a_HTTP_request_is_received/paths/invoke/SearchCourse/${formattedDate}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YtLoU7tXKw1ECAhLk2OZ_CTBnBoQBAi-G7LsDCH3B2s`)
           .then(response => {
             const eventData = response.data.Table1;
             setShowEventModal(eventData.length > 0);

@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   const handleCalendarViewClick = async () => {
     try {
-      const response = await fetch('https://prod-62.eastus.logic.azure.com/workflows/f40390d3b1fe4001878fec9dc26af2cf/triggers/manual/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=GrNkiypWxhQE0V55YgxxynDrncq4y89zXnT-M4H0U10');
+      const response = await fetch('https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk');
       const data = await response.json();
       setCalendarData(data.Table1);
       openModal('calendarView');
@@ -88,58 +88,59 @@ const Sidebar = () => {
          <button className="close" onClick={closeModal}>&#10006;</button>
         <h2 className="allEventTitle">List of all events</h2>
         <div className="allEventsDataTable">
-              <table className="mainTable" id="style-3 example">
-                <thead className="formHeader">
-                  <tr className="formHeader_tr">
-                    <th className="formHeader_tr_th">Course Name 
-                      <div className='form-group'>  
-                          <select className='form-control' onChange={handleCourseNameChange}>  
-                            <option value=''>View All</option>  
-                            {renderOptions([...new Set(calendarData.map(course => course.courseName))])}
-                          </select>  
-                      </div>
-                    </th>
-                    <th className="formHeader_tr_th">Start Date
-                      <div className='form-group'>  
-                            <select className='form-control' onChange={handleStartDateChange}>  
-                              <option value=''>View All</option>  
-                              {renderOptions([...new Set(calendarData.map(course => course.startProgramDates))])}
-                            </select>  
-                      </div>
-                    </th>
-                    <th className="formHeader_tr_th">End Date
-                      <div className='form-group'>  
-                            <select className='form-control' onChange={handleEndDateChange}>  
-                              <option value=''>View All</option>  
-                              {renderOptions([...new Set(calendarData.map(course => course.endProgramDates))])}
-                            </select>  
-                      </div>
-                    </th>
-                    <th className="formHeader_tr_th">Status
-                      <div className='form-group'>  
-                        <select className='form-control' onChange={handleStatusChange}>  
-                          <option value=''>View All</option>  
-                            {renderOptions([...new Set(calendarData.map(course => course.status))])}
-                        </select>  
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="formBody">  
-                  {activeData ? (  
-                    rows  
-                  ) : (  
-                    calendarData.map((course) => (  
-                      <tr key={course.id} className="formBody_tr">  
-                        <td className="formBody_tr_td">{course.courseName}</td>  
-                        <td className="formBody_tr_td">{course.startProgramDates}</td>  
-                        <td className="formBody_tr_td">{course.endProgramDates}</td>  
-                        <td className="formBody_tr_td">{course.status}</td>  
-                      </tr>  
-                    ))  
-                  )}  
-                </tbody>      
-              </table>
+          <table className="mainTable" id="style-3 example">
+          <thead className="formHeader">
+            <tr className="formHeader_tr">
+              <th className="formHeader_tr_th">Course Name 
+                <div className='form-group'>  
+                  <select className='form-control' onChange={handleCourseNameChange}>  
+                    <option value=''>View All</option>  
+                    {renderOptions([...new Set(calendarData.map(course => course.courseName))])}
+                  </select>  
+                </div>
+              </th>
+              <th className="formHeader_tr_th">Start Date
+                <div className='form-group'>  
+                  <select className='form-control' onChange={handleStartDateChange}>  
+                    <option value=''>View All</option>  
+                    {renderOptions([...new Set(calendarData.map(course => course.startProgramDates))])}
+                  </select>  
+                </div>
+              </th>
+              <th className="formHeader_tr_th">End Date
+                <div className='form-group'>  
+                  <select className='form-control' onChange={handleEndDateChange}>  
+                    <option value=''>View All</option>  
+                    {renderOptions([...new Set(calendarData.map(course => course.endProgramDates))])}
+                  </select>  
+                </div>
+              </th>
+              <th className="formHeader_tr_th">Status
+                <div className='form-group'>  
+                  <select className='form-control' onChange={handleStatusChange}>  
+                    <option value=''>View All</option>  
+                    {renderOptions([...new Set(calendarData.map(course => course.status))])}
+                  </select>  
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="formBody">  
+          {activeData ? (  
+            rows  
+            ) : (  
+              calendarData.map((course) => (  
+                <tr key={course.id} className="formBody_tr">  
+                  <td className="formBody_tr_td">{course.courseName}</td>  
+                  <td className="formBody_tr_td">{course.startProgramDates}</td>  
+                  <td className="formBody_tr_td">{course.endProgramDates}</td>  
+                  <td className="formBody_tr_td">{course.status}</td>  
+                </tr>  
+              )) 
+            )
+          } 
+          </tbody>         
+          </table>
           </div>   
       </div>
     );

@@ -30,7 +30,6 @@ export default function Day({ day, rowIdx }) {
       courses,
     }));
     setEventsCountandDate(coursesCountByDate);
-    // console.log("At DAY.JS", eventsCountandDate)
   };
  
   useEffect(() => {
@@ -38,9 +37,9 @@ export default function Day({ day, rowIdx }) {
       try {
         let url;
         if (selectedDropValue) {
-          url = `https://prod-17.eastus.logic.azure.com/workflows/631fa072cd384239afcdfbc82e0e16da/triggers/manual/paths/invoke/coursecountbydatewithfilter/${selectedDropValue}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZcIrZZDvWhebpn2VR4Cc95aoxnkpMkEfujgiqPGDHF4`;
+          url = `https://prod-09.eastus.logic.azure.com/workflows/0d69182701604e7c8a12b3632f801287/triggers/When_a_HTTP_request_is_received/paths/invoke/filter/${selectedDropValue}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4Bzye-5EuXUkevkiQ2x8OtoUT_z9cNdC1ag77-qM3fY`;
         } else {
-          url = 'https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw';
+          url = 'https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8';
         }
         const response = await axios.get(url);
         const eventData = response.data.Table1;

@@ -30,7 +30,7 @@ export default function SmallCalendar() {
 
   async function fetchUpcomingEvents() {
     try {
-      const response = await axios.get('https://prod-11.eastus.logic.azure.com/workflows/ba5dfb026b324344877d968d45878d8c/triggers/manual/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bySuNwVKI0oz-NgxPckW0Z0oQtVoEFBBOLAotW9HL0I');
+      const response = await axios.get('https://prod-42.eastus.logic.azure.com/workflows/01eb1875c751428685a9d58000e221d5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=2wmzlVlg3fsgnZXxrK8uiR-vOK_gYyAt8g4zOKDRveY');
       console.log(response.data)
       setUpcomingEvents(response.data.Table1);
     } catch (error) {
@@ -126,8 +126,8 @@ export default function SmallCalendar() {
       {showEventModalAtSmall && (
         <ModalContainer onClose={() => setShowEventModalAtSmall(false)}>
           <h2 className="allEventTitle">Upcoming Events</h2>
-          <div class="allEventsDataTable">
-            <table class="fl-table" id="style-3">
+          <div className="allEventsDataTable">
+            <table className="fl-table" id="style-3">
               <thead>
                 <tr>
                   <th>Source</th>

@@ -6,7 +6,7 @@ const EditAndDelete = () => {
   const [data, setData] = useState([])  
 
   useEffect(()=>{
-    const url = 'https://prod-62.eastus.logic.azure.com/workflows/53708f33e38142e1b3b56df534a9b5d0/triggers/manual/paths/invoke/coursecountbydate?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=AgIJRP4YoKcWhQ0lF6RMwuGA1--wYQizRu6ZUxFPEsw'
+    const url = 'https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8'
     axios.get(url).then(response=> {
       const profileDropDownData = response.data.Table1;
       setData(profileDropDownData);
@@ -15,7 +15,6 @@ const EditAndDelete = () => {
   
   return (  
     <div>  
-      {console.log(data)}
       <AllTheData data={data} />  
     </div>  
   );  
