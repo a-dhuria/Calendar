@@ -73,7 +73,7 @@ export default function SmallCalendar() {
 
   return (
     <div className="smallcalendar">
-      <header className="smallcal">
+      <header className="smallcal"> 
         <p className="text-gray-500 font-bold smallCalMonth">
           {dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
             "MMMM YYYY"
