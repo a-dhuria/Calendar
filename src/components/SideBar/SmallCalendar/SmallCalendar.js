@@ -12,7 +12,7 @@ export default function SmallCalendar() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [showEventModalAtSmall, setShowEventModalAtSmall] = useState(false);
-
+  
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
   }, [currentMonthIdx]);
@@ -30,7 +30,7 @@ export default function SmallCalendar() {
 
   async function fetchUpcomingEvents() {
     try {
-      const response = await axios.get('https://prod-42.eastus.logic.azure.com/workflows/01eb1875c751428685a9d58000e221d5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=2wmzlVlg3fsgnZXxrK8uiR-vOK_gYyAt8g4zOKDRveY');
+      const response = await axios.get('https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk');
       console.log(response.data)
       setUpcomingEvents(response.data.Table1);
     } catch (error) {

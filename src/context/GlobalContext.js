@@ -8,9 +8,6 @@ export const GlobalProvider = ({ children }) => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [showComponent, setShowComponent] = useState(false);
   const [selectedDropValue, setSelectedDropValue] = useState('');  
-   
-
-
 
   const contextValue = {
     showComponent,

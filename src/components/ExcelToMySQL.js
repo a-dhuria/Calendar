@@ -72,8 +72,8 @@ async function insertData(sheetName, rows) {
 
     const sql = `
       INSERT INTO Calender 
-      (source, startProgramDates, endProgramDates, startTime, endTime, courseName, targetAudience, format, registrationLink) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (source, startProgramDates, endProgramDates, startTime, endTime, courseName, targetAudience, format, registrationLink, practice) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     try {
@@ -102,7 +102,8 @@ async function insertData(sheetName, rows) {
         row['Course Name'],
         row['Target Audience'],
         row['Format'],
-        row['Registration Link']
+        row['Registration Link'],
+        row['Practice']
       ];
 
       const [results] = await connection.query(sql, data);

@@ -32,6 +32,38 @@ export default function EventModal() {
     }
   }, [daySelected]);
 
+
+  const startsFromDate = (currentDate)=>{
+    const todayDate = dayjs().format('DD-MM-YYYY');
+    if(todayDate === currentDate){
+      return 'Starts from Today'
+    }
+    const parts = eventsForSelectedDay[0].startProgramDates.split('-');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const year = parseInt(parts[2], 10);
+
+    function getSuffix(day){
+      if(day >= 11 && day <= 13){
+        return 'th'
+      }
+      switch(day%10){
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    }
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June', 
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    const ordinalSuffix = getSuffix(day);
+    const monthName = monthNames[month - 1];
+    const formattedDate = `${day}${ordinalSuffix} ${monthName}, ${year}`;
+    return `Started on ${formattedDate}`;
+  }
+
   const formatDate = useMemo(() => (currentDate) => {
     const todayDate = dayjs().format('DD-MM-YYYY');
     if(todayDate === currentDate){
@@ -107,7 +139,10 @@ export default function EventModal() {
               <div className="card">
                 <h3 className="card__title">{event.courseName}</h3>
                 <p className="card__content">{`From ${convertTimeToLocale(event.startTime)} to ${convertTimeToLocale(event.endTime)}`}</p>
-                <div className="card__date">{`Starts from ${formatDate(event.startProgramDates)}`}</div>
+                {console.log(event)}
+                {/* <div className="card__date">{`Starts from ${formatDate(daySelected.format("DD-MM-YYYY"))}`}</div> */}
+                <div className="card__date">{`${startsFromDate(daySelected.format("DD-MM-YYYY"))}`}</div>
+
                 {event.registrationLink ? (
                   <div className="card__arrow">
                     <p className="card__arrow_click" onClick={() => RedirectToPage(event.registrationLink)}>Register Now</p>

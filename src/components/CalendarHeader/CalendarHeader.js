@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./CalendarHeader.css";
 import dayjs from "dayjs";
-import logo from "../../assets/logo-pwc-white-2x.png";
-import banner from "../../assets/Cloud Academy - Internal header banner.png"
+import Banner from "./Banner/Banner";
 import GlobalContext from "../../Context/GlobalContext";
 import "../EventModal/EventModal.css";
 import "../ModalContainer/ModalContainer.css";
 import CourseDetailsModal from "../CourseDetailsModal/CourseDetailsModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import { useMsal } from '@azure/msal-react';
+import AuthSign from './AuthSignIn/AuthSign';
 
+// import { AuthenticatedTemplate, UnauthenticatedTemplate,useMsal, MsalProvider } from "@azure/msal-react";
 
 const CourseSearch = () => {
   const { monthIndex, setMonthIndex, selectedDropValue, setSelectedDropValue } = useContext(GlobalContext);
@@ -18,7 +20,6 @@ const CourseSearch = () => {
   const [selectedCourseDetails, setSelectedCourseDetails] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dropDownData, setDropDown] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     if (searchTerm.trim() === "") {
@@ -42,7 +43,6 @@ const CourseSearch = () => {
         });
     }, 300);
     return () => clearTimeout(timeout); 
-
   }, [searchTerm]);
 
 
@@ -107,13 +107,7 @@ const CourseSearch = () => {
 
   return (
     <header className="Main-header">
-      <div className="header-row-1">
-        <div className="header-logos">
-          <img src={logo} alt="PwC Logo - White outlined" className="logo" />
-          <img src={banner} alt="PWC Banner" className="banner"/> 
-        </div>
-        <p className="header-row-1-title">Cloud Academy Calendar</p>
-      </div>
+      <Banner term={"Cloud Academy Calendar"}/>
       <div className="header-row-2">
         <button onClick={handleReset} className="button-calendar-today">
           Today
@@ -143,6 +137,7 @@ const CourseSearch = () => {
             name="text"
             placeholder="Search any course"
             className="input"
+            autocomplete="off"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -173,17 +168,13 @@ const CourseSearch = () => {
         <div className="form-group">  
           <select value={selectedDropValue} onChange={handleDropdownChange} className='formControlPractice'>  
             <option value="">Select your practice</option>  
-            {renderOptions([...new Set(dropDownData.map(result => result.source))])}
+            {renderOptions([...new Set(dropDownData.map(result => result.practice))])} 
           </select>  
         </div> 
-        <div className="form-group">  
-          <button className="button-calendar-today" onClick={() => navigate("/addEvents")}>Add events</button> 
-        </div> 
-        <div className="form-group">  
-          <button className="button-calendar-today" onClick={() => navigate("/editdeletedata")}>Edit or Delete Events</button> 
-        </div> 
+        <AuthSign />
+        {/* <button className="button-calendar-today" onClick={()=> navigate("adminPage")}>Admin Access</button> */}
+        {/* <button className="button-calendar-today" onClick={() => navigate("/adminPage")}>Admin Login</button>  */}
       </div>
-       
     </header>
   );
 };

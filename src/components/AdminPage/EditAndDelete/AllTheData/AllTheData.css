@@ -1,0 +1,33 @@
+.table{
+    width: 100%;
+}
+
+.mainTable{
+    overflow-y: auto;
+}
+
+.mainTable_body{
+    overflow-y: auto;
+}
+
+.edit-input{
+    width: 100% !important; 
+    padding: 1rem !important;
+}
+
+.mainTable-input{
+    font-size: 0.6rem;
+    padding: 0.1rem;
+    width: 100%;
+}
+
+
+.modal-content{
+    background-color: #dedede !important;
+}
+
+.modal-actions{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

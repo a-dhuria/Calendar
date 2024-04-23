@@ -9,12 +9,14 @@ const Sidebar = () => {
   const [activeModal, setActiveModal] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeData, setActiveData] = useState();
+  const [showAllEventsModal, setShowAllEventsModal] = useState(false);
 
   const handleCalendarViewClick = async () => {
     try {
-      const response = await fetch('https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk');
+      const response = await fetch('https://prod-33.eastus.logic.azure.com/workflows/5ecb6d8f908e4752991c3c23e16e39c5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YXSyfVCQ_CiACJRuAages-B-rTvCBsAadMFFTnN-FXY');
       const data = await response.json();
       setCalendarData(data.Table1);
+      // setShowAllEventsModal(true)
       openModal('calendarView');
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -66,10 +68,13 @@ const Sidebar = () => {
 
   const openModal = (modalType) => {
     setActiveModal(modalType);
+    setShowAllEventsModal(false)
   };
 
   const closeModal = () => {
     setActiveModal(null);
+    setShowAllEventsModal(false)
+
   };
 
   const toggleSidebar = () => {
@@ -150,11 +155,11 @@ const Sidebar = () => {
     <>
       <label className="hamburger-menu">
           <input type="checkbox" />
-        </label> 
+      </label> 
       <aside className={`sidebar ${sidebarOpen ? 'sidebar--open' : ''}` } onClick={toggleSidebar}>
-        <button className="eventsModalOpenClickButton" onClick={handleCalendarViewClick}>All Events</button>
+        <button className="eventsModalOpenClickButton" onClick={() => {handleCalendarViewClick()}}>All Events</button>
         <SmallCalendar />
-        {activeModal && renderTable()}
+        {showAllEventsModal && renderTable()}
         <div className="alert alert--error">
           <i className="fa fa-times-circle fa-2xl icon"></i> 
           <div className="content">
