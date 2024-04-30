@@ -1,0 +1,18 @@
+.delete{
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    background-color: #dedede;
+    padding: 2rem;
+    border-radius: 4px;
+}
+
+.delete-content h1 {
+    color: #d04a02;
+    font-weight: 700;
+}
+
+.delete-content h2 {
+    font-weight: 600;
+}

@@ -1,0 +1,54 @@
+.adminPage{
+    width: 100%;
+    background-color: beige;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminPage_adding{
+    flex: 1;
+    background-color: #f1f1f1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #464646;
+    cursor: pointer;
+}
+
+.adminPage_adding:hover{
+    background-color: #d04a02;
+    transition: 200ms;
+    color: white;
+
+}
+
+.adminPage_editdelete{
+    flex: 1;
+    background-color: #f1f1f1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #464646;
+    cursor: pointer;
+}
+
+.adminPage_editdelete:hover{
+    background-color: #d04a02;
+    transition: 200ms;
+    color: white;
+}
+
+.adminPage-button{
+    padding: 2rem;
+    border-radius: 0.8rem;
+    background-color: aliceblue;
+    font-size: 0.6rem;
+}
+
+.adminPage_para{
+    font-weight: 800;
+}

@@ -1,20 +1,30 @@
-.main {
-    height: 100vh;
-    border-radius: 15px;
-    padding: 10px 20px;
-    transition: transform 0.2s;
-    overflow-y: auto;
-    background-color: #f1f1f1;
+.singleUpdate{
+    width: 100%;
+    flex: 1;
+}
 
-  }
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5rem;    
+}
   
-  .form-title {
+.main-form{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    
+.form-title {
     color: #ff6a00;
     font-size: 1rem;
     font-weight: 600;
-  }
-  
-  .updateEvents-label {
+}
+    
+.updateEvents-label {
     display: block;
     width: 100%;
     margin-top: 10px;
@@ -23,14 +33,14 @@
     color: #555;
     font-weight: bold;
     font-size: 0.6rem;
-  }
-  
-  #pass {
+}
+    
+#pass {
     color: #ff6a00;
     font-size: 12px;
-  }
-  
-  .updateEvents-input {
+}
+    
+.updateEvents-input {
     display: block;
     width: 100%;
     margin-bottom: 5px;
@@ -41,16 +51,14 @@
     font-size: 0.6rem;
     outline: none;
     border: none;
-
-  }
-
-  .updateEvents-input:focus{
+}
+  
+.updateEvents-input:focus{
     outline: none;
     border: none;
-
-  }
-  
-  .updateEvents-select {
+}
+    
+.updateEvents-select {
     display: block;
     width: 100%;
     margin-bottom: 15px;
@@ -59,9 +67,9 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 0.6rem;
-  }
-  
-  .updateEvents-Button {
+}
+    
+.updateEvents-Button {
     padding: 2px;
     border-radius: 10px;
     margin-top: 15px;
@@ -69,12 +77,11 @@
     border: none;
     color: white;
     cursor: pointer;
-
     width: 100%;
     font-size: 9px;
-  }
-  
-  .wrap {
+}
+    
+.wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,5 +89,5 @@
     height: 2rem;
     border-radius: 4px;
     background-color: #ff6a00;
-  }
-  
+}
+    

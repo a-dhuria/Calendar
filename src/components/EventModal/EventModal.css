@@ -1,7 +1,7 @@
 .modal-content {
   background-color: #ffffff;
   border: 1px solid #ffffff;
-  height: 100%;
+  height: 80%;
   width: 100%;
   border-radius: 10px;
 }
@@ -18,7 +18,7 @@
 
 .visible{
   width: 20%;
-  
+  /* background-color: #272727; */
 }
 
 .modal-content_title{
@@ -32,7 +32,9 @@
   align-items: left;
   gap: 1rem;
   margin-top: 1rem;
-  height: 100%;
+  height: 70%;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .modal-data{
@@ -56,14 +58,17 @@
   padding: 1.3rem;
   cursor: pointer;
   border-radius: var(--border-radius);
-  background: #dedede;
+  background: #f1f1f1;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.202);
   position: relative;
+  border-radius: 10px;
   
 }
 
 .card > * + * {
   margin-top: 0.2rem;
+  border-radius: 4px;
+
 }
 
 .card .card__content {

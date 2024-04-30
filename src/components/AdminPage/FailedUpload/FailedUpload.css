@@ -1,0 +1,18 @@
+.failed{
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    background-color: #dedede;
+    padding: 2rem;
+    border-radius: 4px;
+}
+
+.failed-content h1 {
+    color: #d04a02;
+    font-weight: 700;
+}
+
+.failed-content h2 {
+    font-weight: 600;
+}

@@ -1,0 +1,13 @@
+.main {
+  height: 100vh;
+  transition: transform 0.2s;
+  overflow-y: auto;
+  background-color: #f1f1f1;
+}
+
+.main-section{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+
+}

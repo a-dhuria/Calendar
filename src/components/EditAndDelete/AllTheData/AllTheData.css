@@ -9,3 +9,8 @@
 .mainTable_body{
     overflow-y: auto;
 }
+
+.edit-input{
+    width: 100% !important; 
+    padding: 1rem !important;
+}
