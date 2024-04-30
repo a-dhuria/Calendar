@@ -4,3 +4,17 @@
     margin-left: 20%;
     align-items: center;
 }
+
+.header-buttons{
+    display: flex;
+    margin-left: 6rem;
+    gap: 1rem;
+}
+
+.header-button{
+    background-color: rgb(255, 255, 255);
+    padding: 0.2rem 1rem;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    cursor: pointer;
+}

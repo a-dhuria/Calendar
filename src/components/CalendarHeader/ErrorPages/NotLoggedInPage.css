@@ -1,0 +1,19 @@
+.notAdminPage {
+    height: 100vh;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #dedede;
+}
+
+.notAdminPage h2{
+    font-size: 2rem;
+    color: #d04a02;
+}
+  
+.barrier img {
+    max-height: 400px;
+}
+  

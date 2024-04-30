@@ -4,25 +4,21 @@ import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../../Context/GlobalContext";
 import { getMonth } from "../../../util";
-import './SmallCalendar.css';
-import ModalContainer from '../../ModalContainer/Modalcontainer';
+import "./SmallCalendar.css";
+import ModalContainer from "../../ModalContainer/Modalcontainer";
 
 export default function SmallCalendar() {
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [showEventModalAtSmall, setShowEventModalAtSmall] = useState(false);
-  
+
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
   }, [currentMonthIdx]);
 
-  const {
-    monthIndex,
-    setSmallCalendarMonth,
-    setDaySelected,
-    daySelected,
-  } = useContext(GlobalContext);
+  const { monthIndex, setSmallCalendarMonth, setDaySelected, daySelected } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonthIdx(monthIndex);
@@ -30,11 +26,13 @@ export default function SmallCalendar() {
 
   async function fetchUpcomingEvents() {
     try {
-      const response = await axios.get('https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk');
-      console.log(response.data)
+      const response = await axios.get(
+        "https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk"
+      );
+      console.log(response.data);
       setUpcomingEvents(response.data.Table1);
     } catch (error) {
-      console.error('Error fetching upcoming events:', error);
+      console.error("Error fetching upcoming events:", error);
     }
   }
 
@@ -62,26 +60,24 @@ export default function SmallCalendar() {
 
   const isEventDatePast = (eventDate) => {
     const currentDate = new Date();
-    return dayjs(eventDate).isBefore(currentDate, 'day');
+    return dayjs(eventDate).isBefore(currentDate, "day");
   };
 
-  function RedirectToPage(url) { 
-    if(url){
-      window.location.href = url;  
-    } 
+  function RedirectToPage(url) {
+    if (url) {
+      window.location.href = url;
+    }
   }
 
   return (
     <div className="smallcalendar">
-      <header className="smallcal"> 
+      <header className="smallcal">
         <p className="text-gray-500 font-bold smallCalMonth">
-          {dayjs(new Date(dayjs().year(), currentMonthIdx)).format(
-            "MMMM YYYY"
-          )}
+          {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
         </p>
         <div>
           <button onClick={handlePrevMonth}>
-            <span className="material-icons-outlined cursor-pointer text-gray-600 mx-1 chev" >
+            <span className="material-icons-outlined cursor-pointer text-gray-600 mx-1 chev">
               chevron_left
             </span>
           </button>
@@ -117,12 +113,14 @@ export default function SmallCalendar() {
       </div>
       <br />
       <button
-      className="eventsModalOpenClickButton"  // Add the calendar-view-btn class
-      onClick={() => {
-        fetchUpcomingEvents();
-        setShowEventModalAtSmall(true);
-      }}
-      >Upcoming Events</button>
+        className="eventsModalOpenClickButton" // Add the calendar-view-btn class
+        onClick={() => {
+          fetchUpcomingEvents();
+          setShowEventModalAtSmall(true);
+        }}
+      >
+        Upcoming Events
+      </button>
       {showEventModalAtSmall && (
         <ModalContainer onClose={() => setShowEventModalAtSmall(false)}>
           <h2 className="allEventTitle">Upcoming Events</h2>
@@ -138,7 +136,7 @@ export default function SmallCalendar() {
                   <th>Course Name</th>
                   <th>Target Audience</th>
                   <th>Format</th>
-                  <th>Registration</th>              
+                  <th>Registration</th>
                 </tr>
               </thead>
               <tbody>
@@ -154,18 +152,24 @@ export default function SmallCalendar() {
                     <td>{event.format}</td>
                     <td>
                       <div>
-                        {!isEventDatePast(new Date(event.startProgramDates)) && event.registrationLink ? (
-                          <button className="eventsModalOpenClickButton" onClick={()=>RedirectToPage(event.registrationLink)}>Apply</button>
-                        )
-                        :
-                          (
-                            <button className="upcoming-eventss">TBD</button>
-                          )}
-                      </div>  
+                        {!isEventDatePast(new Date(event.startProgramDates)) &&
+                        event.registrationLink ? (
+                          <button
+                            className="eventsModalOpenClickButton"
+                            onClick={() =>
+                              RedirectToPage(event.registrationLink)
+                            }
+                          >
+                            Apply
+                          </button>
+                        ) : (
+                          <button className="upcoming-eventss">TBD</button>
+                        )}
+                      </div>
                     </td>
                   </tr>
-                ))}   
-              </tbody>     
+                ))}
+              </tbody>
             </table>
           </div>
         </ModalContainer>

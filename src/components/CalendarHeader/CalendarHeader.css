@@ -59,7 +59,7 @@
 .header-row-1-title {
   color: #ffffff;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -533,10 +533,10 @@ select.formControlPractice:focus{
     height: 70px;
   }
   .header-row-1-title {
-    margin-left: 0%;
+    margin-left: -5%;
     /* font-size: 1.2rem;
      */
-     font-size: 32px;
+     font-size: 28px;
   }
   .monthTitle{
     font-size: 0.8rem;
