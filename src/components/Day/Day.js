@@ -13,6 +13,33 @@ export default function Day({ day, rowIdx }) {
   const [eventsCountandDate, setEventsCountandDate] = useState([]);
   const [page, setPage] = useState(1);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let encodedWord = encodeURIComponent(selectedDropValue);
+        let url = selectedDropValue
+          ? `https://prod-09.eastus.logic.azure.com/workflows/0d69182701604e7c8a12b3632f801287/triggers/When_a_HTTP_request_is_received/paths/invoke/filter/${encodedWord}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4Bzye-5EuXUkevkiQ2x8OtoUT_z9cNdC1ag77-qM3fY`
+          : "https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8";
+        const response = await axios.get(url, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            withCredentials: true,
+            mode: "no-cors",
+          },
+        });
+        const eventData = response.data.Table1;
+        console.log(eventData);
+        countAndOrganizeEvents(eventData);
+      } catch (error) {
+        console.error("Unable to fetch events count and details", error);
+      }
+    };
+    if (daySelected) {
+      fetchData();
+    }
+  }, [daySelected, selectedDropValue, page]);
+
   const countAndOrganizeEvents = (eventData) => {
     const coursesByDate = {};
     eventData.forEach(
@@ -28,7 +55,6 @@ export default function Day({ day, rowIdx }) {
       }) => {
         const startDate = parse(startProgramDates, "dd-MM-yyyy", new Date());
         const endDate = parse(endProgramDates, "dd-MM-yyyy", new Date());
-
         for (
           let currentDay = startDate;
           isBefore(currentDay, endDate) || isEqual(currentDay, endDate);
@@ -42,22 +68,24 @@ export default function Day({ day, rowIdx }) {
             })
             .split("/")
             .join("-");
-
-          coursesByDate[formattedDate] = coursesByDate[formattedDate] || {
+          const existingCourses = coursesByDate[formattedDate]?.courses || [];
+          coursesByDate[formattedDate] = {
             startProgramDates,
             endProgramDates,
-            courses: [],
+            courses: [
+              ...existingCourses,
+              {
+                courseName,
+                startProgramDates,
+                endProgramDates,
+                startTime,
+                endTime,
+                format,
+                registrationLink,
+                practice,
+              },
+            ],
           };
-          coursesByDate[formattedDate].courses.push({
-            courseName,
-            startProgramDates,
-            endProgramDates,
-            startTime,
-            endTime,
-            format,
-            registrationLink,
-            practice,
-          });
         }
       }
     );
@@ -70,28 +98,6 @@ export default function Day({ day, rowIdx }) {
     );
     setEventsCountandDate(coursesCountByDate);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url;
-        if (selectedDropValue) {
-          url = `https://prod-09.eastus.logic.azure.com/workflows/0d69182701604e7c8a12b3632f801287/triggers/When_a_HTTP_request_is_received/paths/invoke/filter/${selectedDropValue}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4Bzye-5EuXUkevkiQ2x8OtoUT_z9cNdC1ag77-qM3fY&page=${page}`;
-        } else {
-          url =
-            "https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8";
-        }
-        const response = await axios.get(url);
-        const eventData = response.data.Table1;
-        countAndOrganizeEvents(eventData);
-      } catch (error) {
-        console.error("Unable to fetch events count and details", error);
-      }
-    };
-    if (daySelected) {
-      fetchData();
-    }
-  }, [daySelected, selectedDropValue, page]);
 
   function handleShowEventModal(eventDate) {
     const currentDate = dayjs();
@@ -113,9 +119,8 @@ export default function Day({ day, rowIdx }) {
   }, [eventsCountandDate, day]);
 
   function RedirectToPage(url) {
-    console.log("This is from RedirectToPage", url);
     if (url) {
-      window.location.href = url;
+      window.open(url, "_blank");
     }
   }
 
@@ -126,27 +131,18 @@ export default function Day({ day, rowIdx }) {
     );
     return eventsOnDay && eventsOnDay.courseCount > 0 ? (
       <div className="eventDetailsBox">
-        {eventsOnDay.courses.map((course) => {
-          return (
-            <div className="force-overflow">
-              {course.registrationLink ? (
-                <p
-                  className="eventsDetailsOnBox_text isClickableEvent"
-                  onClick={() => RedirectToPage(course.registrationLink)}
-                >
-                  {course.courseName}
-                </p>
-              ) : (
-                <p
-                  className="eventsDetailsOnBox_text"
-                  onClick={() => RedirectToPage(course.registrationLink)}
-                >
-                  {course.courseName}
-                </p>
-              )}
-            </div>
-          );
-        })}
+        {eventsOnDay.courses.map((course) => (
+          <div className="force-overflow" key={course.courseName}>
+            <p
+              className={`eventsDetailsOnBox_text ${
+                course.registrationLink ? "isClickableEvent" : ""
+              }`}
+              onClick={() => RedirectToPage(course.registrationLink)}
+            >
+              {course.courseName}
+            </p>
+          </div>
+        ))}
       </div>
     ) : null;
   }
@@ -161,7 +157,6 @@ export default function Day({ day, rowIdx }) {
         event.courses.map((course, courseIndex) => (
           <div className="profile" key={`${index}-${courseIndex}`}>
             <h1 className="profile_title">{course.courseName}</h1>
-            {/* <p className="profile_para">{`On ${formatDate(course.startProgramDates)} till ${formatDate(course.endProgramDates)}, From ${course.startTime} to ${course.endTime}`}</p> */}
           </div>
         ))
       );

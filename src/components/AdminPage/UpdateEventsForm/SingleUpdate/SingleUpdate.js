@@ -106,9 +106,7 @@ const SingleUpdate = () => {
   };
 
   const handleSubmit = async (event) => {
-    console.log("Insert at POST");
     event.preventDefault();
-    console.log(courseName, endDate, registration, startDate, startime);
     const updatedFormData = [
       {
         courseName: courseName,
@@ -128,7 +126,6 @@ const SingleUpdate = () => {
     axios
       .post(url, updatedFormData)
       .then((response) => {
-        console.log(response);
         setSource("");
         setStartDate("");
         setEndDate("");

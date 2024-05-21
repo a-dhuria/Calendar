@@ -28,7 +28,6 @@ const AllTheData = ({ data }) => {
       const filtered = data.filter((item) =>
         item.courseName.toLowerCase().includes(term)
       );
-      console.log("Searching", filtered);
       setFilteredData(filtered);
     }
   };
@@ -38,7 +37,6 @@ const AllTheData = ({ data }) => {
   }, [data]);
 
   const handleSubmit = () => {
-    console.log("Selected Rows:", selectedRows);
     const url = "";
     axios.delete(url, selectedRows).then();
   };
@@ -80,7 +78,6 @@ const AllTheData = ({ data }) => {
   };
 
   const handleDelete = (id) => {
-    console.log(filteredData);
     setShowDeleteModal(true);
     setDeleteItemId(id);
   };

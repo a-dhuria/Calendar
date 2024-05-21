@@ -97,11 +97,26 @@ const CourseSearch = () => {
   };
 
   function renderOptions(uniqueValues) {
-    return uniqueValues.map((value) => (
-      <option value={value} className="formControlPractice_option">
-        {value}
-      </option>
-    ));
+    return uniqueValues.map((value) => {
+      let optionText;
+      if (value === "CD") {
+        optionText = "xC&D";
+      } else if (value === "DAI") {
+        optionText = "Data Analytics & AI";
+      } else if (value === "FIT") {
+        optionText = "F&IT";
+      } else if (value === null) {
+        return null;
+      } else {
+        optionText = value;
+      }
+
+      return (
+        <option value={value} className="formControlPractice_option">
+          {optionText}
+        </option>
+      );
+    });
   }
 
   return (
