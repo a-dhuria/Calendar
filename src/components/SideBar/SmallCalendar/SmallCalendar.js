@@ -27,9 +27,8 @@ export default function SmallCalendar() {
   async function fetchUpcomingEvents() {
     try {
       const response = await axios.get(
-        "https://prod-53.eastus.logic.azure.com/workflows/eeca8fd7d94840cbb2e60ed0df2b3f13/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourses?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=n3bdSqEO3mmxV_rxpBJNKmhtHS8yh981xY0uZVgyRYk"
+        "https://prod-33.eastus.logic.azure.com/workflows/5ecb6d8f908e4752991c3c23e16e39c5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YXSyfVCQ_CiACJRuAages-B-rTvCBsAadMFFTnN-FXY"
       );
-      console.log(response.data);
       setUpcomingEvents(response.data.Table1);
     } catch (error) {
       console.error("Error fetching upcoming events:", error);
@@ -128,6 +127,7 @@ export default function SmallCalendar() {
             <table className="fl-table" id="style-3">
               <thead>
                 <tr>
+                  <th>practice</th>
                   <th>Source</th>
                   <th>Start Program Date</th>
                   <th>End Program Date</th>
@@ -142,6 +142,7 @@ export default function SmallCalendar() {
               <tbody>
                 {upcomingEvents.map((event, index) => (
                   <tr key={index}>
+                    <td>{event.practice}</td>
                     <td>{event.source}</td>
                     <td>{event.startProgramDates}</td>
                     <td>{event.endProgramDates}</td>

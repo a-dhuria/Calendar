@@ -23,7 +23,6 @@ const msalInstance = new PublicClientApplication(msalConfig);
 
 msalInstance.addEventCallback((event) => {
   if (event.eventType === EventType.LOGIN_SUCCESS) {
-    console.log(event);
     msalInstance.setActiveAccount(event.payload.account);
   }
 });

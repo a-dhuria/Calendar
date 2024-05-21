@@ -17,7 +17,6 @@ const dbConfig = {
   },
 };
 
-//wapas upar wala kr dena //
 // const dbConfig = {
 //   host:"gcaltesting.mysql.database.azure.com", user:"GCal", password:"Password@123", database:"calendar", port:3306, ssl:{ca:fs.readFileSync("C:\\Users\\asrinivasa038\\Desktop\\Calendar\\calendar\\DigiCertGlobalRootCA.crt.pem")}
 // };

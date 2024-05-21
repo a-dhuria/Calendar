@@ -7,13 +7,10 @@ const UserName = () => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    console.log("Got under login");
     const currentAccount = instance.getActiveAccount();
     if (currentAccount) {
-      console.log(currentAccount);
       setUserName(currentAccount.name);
     }
-    console.log("Did not go inside this");
   }, [instance]);
 
   return (

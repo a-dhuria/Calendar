@@ -134,27 +134,8 @@ export default function EventModal() {
 
   function RedirectToPage(url) {
     if (url) {
-      window.location.href = url;
+      window.open(url, "_blank");
     }
-  }
-
-  function convertTimeToLocale(time) {
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const [timeStr, period] = time.split(" ");
-    const [hours, minutes] = timeStr.split(":").map(Number);
-    const adjustedHours = period === "PM" ? hours + 12 : hours;
-    const userDate = new Date();
-
-    userDate.toLocaleTimeString("en-US", { timeZone: userTimezone });
-    userDate.setHours(adjustedHours, minutes, 0, 0);
-
-    const localTime = userDate.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-      timeZone: userTimezone,
-    });
-    return localTime;
   }
 
   return (
@@ -178,10 +159,7 @@ export default function EventModal() {
             {eventsForSelectedDay.map((event) => (
               <div className="card">
                 <h3 className="card__title">{event.courseName}</h3>
-                <p className="card__content">{`From ${convertTimeToLocale(
-                  event.startTime
-                )} to ${convertTimeToLocale(event.endTime)}`}</p>
-                {console.log(event)}
+                <p className="card__content">{`From ${event.startTime} to ${event.endTime}`}</p>
                 <div className="card__date">{`${startsFromDate(
                   daySelected.format("DD-MM-YYYY")
                 )}`}</div>
