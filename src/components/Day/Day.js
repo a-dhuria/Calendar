@@ -1,103 +1,19 @@
-import React, { useContext, useState, useEffect, useMemo } from "react";
-import { parse, isBefore, isEqual, addDays } from "date-fns";
-import axios from "axios";
+import React, { useContext, useEffect, useMemo } from "react";
 import dayjs from "dayjs";
 import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
 import GlobalContext from "../../Context/GlobalContext";
 import "./Day.css";
+import BoxData from "./BoxData/BoxData";
 
 export default function Day({ day, rowIdx }) {
-  const { setDaySelected, setShowEventModal, daySelected, selectedDropValue } =
-    useContext(GlobalContext);
-  const [eventsCountandDate, setEventsCountandDate] = useState([]);
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let encodedWord = encodeURIComponent(selectedDropValue);
-        let url = selectedDropValue
-          ? `https://prod-09.eastus.logic.azure.com/workflows/0d69182701604e7c8a12b3632f801287/triggers/When_a_HTTP_request_is_received/paths/invoke/filter/${encodedWord}?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4Bzye-5EuXUkevkiQ2x8OtoUT_z9cNdC1ag77-qM3fY`
-          : "https://prod-71.eastus.logic.azure.com/workflows/6cb8572e6795450abd8add7c836c1b43/triggers/When_a_HTTP_request_is_received/paths/invoke/coursecount?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a7jT-C0mSLtnoNW0U9C-6XYKpyuzxxazLPa_GglJnj8";
-        const response = await axios.get(url, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            withCredentials: true,
-            mode: "no-cors",
-          },
-        });
-        const eventData = response.data.Table1;
-        console.log(eventData);
-        countAndOrganizeEvents(eventData);
-      } catch (error) {
-        console.error("Unable to fetch events count and details", error);
-      }
-    };
-    if (daySelected) {
-      fetchData();
-    }
-  }, [daySelected, selectedDropValue, page]);
-
-  const countAndOrganizeEvents = (eventData) => {
-    const coursesByDate = {};
-    eventData.forEach(
-      ({
-        startProgramDates,
-        endProgramDates,
-        courseName,
-        startTime,
-        endTime,
-        format,
-        registrationLink,
-        practice,
-      }) => {
-        const startDate = parse(startProgramDates, "dd-MM-yyyy", new Date());
-        const endDate = parse(endProgramDates, "dd-MM-yyyy", new Date());
-        for (
-          let currentDay = startDate;
-          isBefore(currentDay, endDate) || isEqual(currentDay, endDate);
-          currentDay = addDays(currentDay, 1)
-        ) {
-          const formattedDate = currentDay
-            .toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-            })
-            .split("/")
-            .join("-");
-          const existingCourses = coursesByDate[formattedDate]?.courses || [];
-          coursesByDate[formattedDate] = {
-            startProgramDates,
-            endProgramDates,
-            courses: [
-              ...existingCourses,
-              {
-                courseName,
-                startProgramDates,
-                endProgramDates,
-                startTime,
-                endTime,
-                format,
-                registrationLink,
-                practice,
-              },
-            ],
-          };
-        }
-      }
-    );
-    const coursesCountByDate = Object.entries(coursesByDate).map(
-      ([date, { courses }]) => ({
-        date,
-        courseCount: courses.length,
-        courses,
-      })
-    );
-    setEventsCountandDate(coursesCountByDate);
-  };
+  const {
+    setDaySelected,
+    setShowEventModal,
+    selectedDropValue,
+    practiceSiteData,
+    setPage,
+  } = useContext(GlobalContext);
 
   function handleShowEventModal(eventDate) {
     const currentDate = dayjs();
@@ -112,11 +28,11 @@ export default function Day({ day, rowIdx }) {
 
   const hasEventsOnDay = useMemo(() => {
     const formattedDay = day.format("DD-MM-YYYY");
-    const eventsOnDay = eventsCountandDate.find(
+    const eventsOnDay = practiceSiteData.find(
       (evt) => evt.date === formattedDay
     );
     return eventsOnDay && eventsOnDay.courseCount > 0 ? "hasEvents" : "bg";
-  }, [eventsCountandDate, day]);
+  }, [practiceSiteData, day]);
 
   function RedirectToPage(url) {
     if (url) {
@@ -125,31 +41,38 @@ export default function Day({ day, rowIdx }) {
   }
 
   function getEventDetails() {
-    const formattedDay = day.format("DD-MM-YYYY");
-    const eventsOnDay = eventsCountandDate.find(
+    let formattedDay = day.format("DD-MM-YYYY");
+    const eventsOnDay = practiceSiteData.find(
       (evt) => evt.date === formattedDay
     );
+
     return eventsOnDay && eventsOnDay.courseCount > 0 ? (
-      <div className="eventDetailsBox">
-        {eventsOnDay.courses.map((course) => (
-          <div className="force-overflow" key={course.courseName}>
-            <p
-              className={`eventsDetailsOnBox_text ${
-                course.registrationLink ? "isClickableEvent" : ""
-              }`}
-              onClick={() => RedirectToPage(course.registrationLink)}
-            >
-              {course.courseName}
-            </p>
+      <>
+        {selectedDropValue ? (
+          <BoxData day={day} />
+        ) : (
+          <div className="eventDetailsBox">
+            {eventsOnDay.courses.map((course) => (
+              <div className="force-overflow" key={course.key}>
+                <p
+                  className={`eventsDetailsOnBox_text ${
+                    course.registrationLink ? "isClickableEvent" : ""
+                  }`}
+                  onClick={() => RedirectToPage(course.registrationLink)}
+                >
+                  {course.courseName}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        )}
+      </>
     ) : null;
   }
 
   function getHoveredEventDetails() {
     const formattedDay = day.format("DD-MM-YYYY");
-    const matchingDates = eventsCountandDate.filter(
+    const matchingDates = practiceSiteData.filter(
       (event) => event.date === formattedDay
     );
     if (matchingDates.length > 0) {
@@ -176,7 +99,7 @@ export default function Day({ day, rowIdx }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  });
 
   return (
     <Grid item className="boxHeight">
@@ -184,9 +107,14 @@ export default function Day({ day, rowIdx }) {
         title={getHoveredEventDetails()}
         placement="bottom-end"
         arrow
-        enterDelay={3000}
+        enterDelay={2000}
         leaveDelay={1}
       >
+        {rowIdx === 0 && (
+          <p className="text-slate-950 day text-center bg-personal daysWeek">
+            {day.format("ddd").toUpperCase()}
+          </p>
+        )}
         <div
           className={`border border-gray-200 flex flex-col calendarbox tooltip ${getCurrentDayClass()} ${hasEventsOnDay}`}
           onClick={() => {
@@ -194,11 +122,6 @@ export default function Day({ day, rowIdx }) {
             handleShowEventModal(day);
           }}
         >
-          {rowIdx === 0 && (
-            <p className="text-slate-950 day text-center bg-personal daysWeek">
-              {day.format("ddd").toUpperCase()}
-            </p>
-          )}
           <div className="flex flex-col">
             <p className={`text-base p-1 my-1 text-center daysNumber`}>
               {day.format("DD")}

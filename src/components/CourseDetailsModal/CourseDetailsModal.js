@@ -12,7 +12,7 @@ const CourseDetailsModal = ({ courseDetails, onClose, onApplyClick }) => {
 
   function RedirectToPage(url) {
     if (url) {
-      window.location.href = url;
+      window.open(url, "_blank");
     }
   }
 

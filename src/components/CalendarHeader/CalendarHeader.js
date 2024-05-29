@@ -40,7 +40,7 @@ const CourseSearch = () => {
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
-    }, 300);
+    }, 100);
     return () => clearTimeout(timeout);
   }, [searchTerm]);
 
@@ -145,24 +145,29 @@ const CourseSearch = () => {
             name="text"
             placeholder="Search any course"
             className="input"
-            autocomplete="off"
+            autoComplete="off"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {searchResults.length > 0 && (
+          {searchResults.length > 0 && searchTerm ? (
             <div className="dropdown">
-              <ul>
+              <ul className="dropdown-options">
                 {searchResults.map((result) => (
-                  <li key={result.id} onClick={() => handleCourseClick(result)}>
+                  <li
+                    key={result.id}
+                    onClick={() => {
+                      handleCourseClick(result);
+                    }}
+                  >
                     <strong>{result.courseName}</strong>
                     <br />
-                    Start Date: {result.startProgramDates} End Date:
+                    Start Date: {result.startProgramDates} End Date:{" "}
                     {result.endProgramDates}
                   </li>
                 ))}
               </ul>
             </div>
-          )}
+          ) : null}
         </div>
         {selectedCourseDetails && isModalOpen && (
           <CourseDetailsModal

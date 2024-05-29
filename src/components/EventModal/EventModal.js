@@ -37,6 +37,7 @@ export default function EventModal() {
 
   const startsFromDate = (currentDate) => {
     const todayDate = dayjs().format("DD-MM-YYYY");
+    let startOrStarted = "";
     if (todayDate === currentDate) {
       return "Starts from Today";
     }
@@ -77,7 +78,7 @@ export default function EventModal() {
     const ordinalSuffix = getSuffix(day);
     const monthName = monthNames[month - 1];
     const formattedDate = `${day}${ordinalSuffix} ${monthName}, ${year}`;
-    return `Started on ${formattedDate}`;
+    return `${startOrStarted} on ${formattedDate}`;
   };
 
   const formatDate = useMemo(

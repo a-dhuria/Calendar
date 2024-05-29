@@ -52,7 +52,7 @@ const AllTheData = ({ data }) => {
     axios
       .post(url, item)
       .then((response) => {
-        console.log("Successfully Edited", response);
+        console.log("Successfully Edited");
       })
       .catch((error) => {
         console.error(error);
@@ -89,7 +89,7 @@ const AllTheData = ({ data }) => {
     axios
       .post(url, updatedData[0])
       .then((response) => {
-        console.log("Successfully Deleted", response);
+        console.log("Successfully Deleted");
         setShowDeleteSuccessModal(true);
         setTimeout(() => {
           setShowDeleteSuccessModal(false);
