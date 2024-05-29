@@ -1,39 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import SmallCalendar from "./SmallCalendar/SmallCalendar";
 import "./Sidebar.css";
-import "datatables.net-select";
-import axios from "axios";
 import Row from "./Row/Row";
+import GlobalContext from "../../Context/GlobalContext";
 
 const Sidebar = () => {
-  const [calendarData, setCalendarData] = useState();
+  const { siteData } = useContext(GlobalContext);
   // eslint-disable-next-line no-unused-vars
   const [activeModal, setActiveModal] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeData, setActiveData] = useState();
   const [showAllEventsModal, setShowAllEventsModal] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url =
-          "https://prod-33.eastus.logic.azure.com/workflows/5ecb6d8f908e4752991c3c23e16e39c5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YXSyfVCQ_CiACJRuAages-B-rTvCBsAadMFFTnN-FXY";
-        const response = await axios.get(url);
-        const data = response.data;
-        setCalendarData(data.Table1);
-        openModal("calendarView");
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [calendarData]);
-
   const handleCourseNameChange = (event) => {
     if (event.target.value === "") {
-      setActiveData(calendarData);
+      setActiveData(siteData);
     } else {
-      const searchData = calendarData.filter((emp) => {
+      const searchData = siteData.filter((emp) => {
         return emp.courseName === event.target.value;
       });
       setActiveData(searchData);
@@ -41,9 +24,9 @@ const Sidebar = () => {
   };
   const handleStartDateChange = (event) => {
     if (event.target.value === "") {
-      setActiveData(calendarData);
+      setActiveData(siteData);
     } else {
-      const searchData = calendarData.filter((emp) => {
+      const searchData = siteData.filter((emp) => {
         return emp.startProgramDates === event.target.value;
       });
       setActiveData(searchData);
@@ -51,9 +34,9 @@ const Sidebar = () => {
   };
   const handleEndDateChange = (event) => {
     if (event.target.value === "") {
-      setActiveData(calendarData);
+      setActiveData(siteData);
     } else {
-      const searchData = calendarData.filter((emp) => {
+      const searchData = siteData.filter((emp) => {
         return emp.endProgramDates === event.target.value;
       });
       setActiveData(searchData);
@@ -61,9 +44,9 @@ const Sidebar = () => {
   };
   const handleStatusChange = (event) => {
     if (event.target.value === "") {
-      setActiveData(calendarData);
+      setActiveData(siteData);
     } else {
-      const searchData = calendarData.filter((emp) => {
+      const searchData = siteData.filter((emp) => {
         return emp.status === event.target.value;
       });
       setActiveData(searchData);
@@ -73,10 +56,6 @@ const Sidebar = () => {
   const rows = activeData
     ? activeData.map((emp) => <Row employee={emp} />)
     : null;
-
-  const openModal = (modalType) => {
-    setActiveModal(modalType);
-  };
 
   const closeModal = () => {
     setActiveModal(null);
@@ -115,9 +94,7 @@ const Sidebar = () => {
                     >
                       <option value="">View All</option>
                       {renderOptions([
-                        ...new Set(
-                          calendarData.map((course) => course.courseName)
-                        ),
+                        ...new Set(siteData.map((course) => course.courseName)),
                       ])}
                     </select>
                   </div>
@@ -132,7 +109,7 @@ const Sidebar = () => {
                       <option value="">View All</option>
                       {renderOptions([
                         ...new Set(
-                          calendarData.map((course) => course.startProgramDates)
+                          siteData.map((course) => course.startProgramDates)
                         ),
                       ])}
                     </select>
@@ -148,7 +125,7 @@ const Sidebar = () => {
                       <option value="">View All</option>
                       {renderOptions([
                         ...new Set(
-                          calendarData.map((course) => course.endProgramDates)
+                          siteData.map((course) => course.endProgramDates)
                         ),
                       ])}
                     </select>
@@ -163,7 +140,7 @@ const Sidebar = () => {
                     >
                       <option value="">View All</option>
                       {renderOptions([
-                        ...new Set(calendarData.map((course) => course.status)),
+                        ...new Set(siteData.map((course) => course.status)),
                       ])}
                     </select>
                   </div>
@@ -171,10 +148,10 @@ const Sidebar = () => {
               </tr>
             </thead>
             <tbody className="formBody">
-              {calendarData
+              {activeData
                 ? rows
-                : calendarData.map((course) => (
-                    <tr key={course.id} className="formBody_tr">
+                : siteData.map((course) => (
+                    <tr key={course.key} className="formBody_tr">
                       <td className="formBody_tr_td">{course.courseName}</td>
                       <td className="formBody_tr_td">
                         {course.startProgramDates}

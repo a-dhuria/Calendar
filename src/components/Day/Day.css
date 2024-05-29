@@ -3,9 +3,9 @@
   overflow: hidden;
   margin: 2px;
 }
- 
+
 .calendarbox {
-  position:relative;
+  position: relative;
   border: 1px solid #ff9500;
   cursor: pointer;
   height: 100%;
@@ -14,34 +14,34 @@
   width: 100%;
 }
 
-.dayEvents{
+.dayEvents {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
   justify-content: center;
   width: 70%;
-  border-radius: 0rem 5rem 5rem 0rem; 
+  border-radius: 0rem 5rem 5rem 0rem;
 }
 
-.daysWeek{
+.daysWeek {
   font-size: 0.6rem;
 }
 
-.daysNumber{
+.daysNumber {
   font-size: 0.6rem;
   font-weight: 700;
 }
 
-.boxHeight{
+.boxHeight {
   height: 5.35rem;
 }
 
-.dayEvents_para{
+.dayEvents_para {
   font-size: 0.8rem;
 }
 
-.none{
+.none {
   display: hidden;
   position: absolute;
 }
@@ -54,70 +54,76 @@
   justify-content: center;
   flex-direction: column;
   color: #fff4e4;
-}  
+}
 
 .profile_title {
-    color: #fff4e4;
-    font-weight: 800;
-    font-size: 0.3rem;
+  color: #fff4e4;
+  font-weight: 800;
+  font-size: 0.3rem;
 }
 .profile_para {
-    color: rgba(black, 0.8);
-    font-size: 0.6rem;
+  color: rgba(black, 0.8);
+  font-size: 0.6rem;
 }
 
 /* Use this class name once the data is available*/
-.hasEvents{
+.hasEvents {
   background-color: #dedede;
 }
 
-.hasEvents::before{
+.hasEvents::before {
   position: absolute;
-  content: '';
+  content: "";
   height: 0;
   width: 0;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 50%, rgb(234, 234, 234) 50%, rgb(170, 170, 170) 60%);
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(234, 234, 234) 50%,
+    rgb(170, 170, 170) 60%
+  );
   border-radius: 0 0 0.5em 0;
   transition: 0.3s;
   width: 1.2em;
   height: 1.2em;
 }
 
-
 /* Additional Animation for Background Color Transition */
-.calendarbox, .event-item {
+.calendarbox,
+.event-item {
   transition: background-color 0.3s ease; /* Add transition for background color change */
 }
- 
-.bg-past-date{
+
+.bg-past-date {
   background: repeating-linear-gradient(
-  45deg,
-  #EEE,
-  #EEE 10px,
-  #FEFEFE 10px,
-  #FEFEFE 20px
-);
- 
-color: #888;
+    45deg,
+    #eee,
+    #eee 10px,
+    #fefefe 10px,
+    #fefefe 20px
+  );
+
+  color: #888;
 }
 .bg-future-date {
   background: repeating-linear-gradient(
     45deg,
-    #E5FFEC,
-    #E5FFEC 10px,
-    #F4FFF4 10px,
-    #F4FFF4 20px
+    #e5ffec,
+    #e5ffec 10px,
+    #f4fff4 10px,
+    #f4fff4 20px
   );
   color: #0b7f45;
 }
- 
+
 .day {
   font-weight: 600;
   font-size: 0.5rem;
 }
- 
+
 .number {
   font-weight: 800;
   color: black;
@@ -126,36 +132,36 @@ color: #888;
 .text-sm {
   font-size: 12px;
 }
- 
+
 /* Day label styles */
 .text-day-label {
   margin-top: 5px;
   text-transform: uppercase;
 }
- 
+
 /* Current day styles */
 .bg-blue-600 {
   background-color: #dedede;
   color: #ff6a00;
   font-weight: 800;
 }
- 
+
 .rounded-full {
   border-radius: 50%;
 }
- 
+
 /* Day number styles */
 .text-day-number {
   padding: 5px;
   margin: 5px;
   text-align: center;
 }
- 
+
 /* Event container styles */
 .flex-1 {
   cursor: pointer;
 }
- 
+
 /* Event item styles */
 .event-item {
   padding: 5px;
@@ -169,34 +175,34 @@ color: #888;
   white-space: nowrap;
   transition: background-color 0.3s ease; /* Add transition for background color change */
 }
- 
+
 /* Event label styles */
 .event-label {
   font-weight: bold;
 }
- 
+
 /* Event background colors based on label */
 .bg-work {
   background-color: #f3f4f6;
 }
- 
+
 .bg-personal {
-  background-color: #ff9500
+  background-color: #ff9500;
 }
- 
+
 .bg-meeting {
   background-color: #22c55e;
 }
- 
+
 /* Hover effect for event items */
 .event-item:hover {
   background-color: #e2e8f0;
 }
- 
+
 .highlight-event-day {
   background-color: yellow;
 }
- 
+
 /* day.css */
 .highlight-event-day {
   background-color: lightyellow;
@@ -218,35 +224,35 @@ color: #888;
   margin-top: 0.8rem;
 }
 
-.eventDetailsBox{
+.eventDetailsBox {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 0.2rem;
-  overflow: auto;  
-  scrollbar-width: thin; 
+  overflow: auto;
+  scrollbar-width: thin;
   max-height: 100px;
   height: 100%;
-  width: 95%;	
+  width: 95%;
   gap: 0.05rem;
 }
 
-.eventDetailsBox::-webkit-scrollbar{
+.eventDetailsBox::-webkit-scrollbar {
   width: 12rem;
 }
-.eventsDetailsOnBox_text::-webkit-scrollbar-thumb {  
-  background-color: #fd0000;  
-  border-radius: 3px;  
-}  
-.eventsDetailsOnBox_text::-webkit-scrollbar-thumb:hover {  
-  background-color: #ed1212;  
-}  
-.eventsDetailsOnBox_text::-webkit-scrollbar-track {  
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 1px; 
-} 
+.eventsDetailsOnBox_text::-webkit-scrollbar-thumb {
+  background-color: #fd0000;
+  border-radius: 3px;
+}
+.eventsDetailsOnBox_text::-webkit-scrollbar-thumb:hover {
+  background-color: #ed1212;
+}
+.eventsDetailsOnBox_text::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 1px;
+}
 
-.eventsDetailsOnBox_text{
+.eventsDetailsOnBox_text {
   background-color: #f1f1f1;
   padding: 1px;
   font-size: 0.5rem;
@@ -256,11 +262,11 @@ color: #888;
   font-weight: 700;
 }
 
-.isClickableEvent:hover{
+.isClickableEvent:hover {
   color: #ff9500;
 }
 
-.eventsDetailsOnBox_text:hover{
+.eventsDetailsOnBox_text:hover {
 }
 
 .IconContainer {
@@ -291,7 +297,7 @@ color: #888;
   color: rgb(0, 0, 0);
   z-index: 1;
   transition-duration: 0.3s;
-  font-size: 0.5rem;  
+  font-size: 0.5rem;
 }
 
 .bookmarkBtn:hover .IconContainer {
@@ -311,460 +317,454 @@ color: #888;
   transition-duration: 0.3s;
 }
 
-@media (max-width: 500px){
-  .profile{
+@media (max-width: 500px) {
+  .profile {
     display: none;
   }
 }
 
-@media (min-width: 100px){
-  .boxHeight{
+@media (min-width: 100px) {
+  .boxHeight {
     height: 4.3rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.2rem;
   }
-  .day{
+  .day {
     font-size: 0.2rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.25rem;
   }
-  .text{
+  .text {
     font-size: 0.2rem;
     margin-right: 0.3rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 100%;
     height: 35%;
     margin-top: 0.5rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.25rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 40%;
   }
-  .profile{
+  .profile {
     padding: 0.1rem 0.1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.4rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 0.9em;
     height: 0.9em;
   }
 }
 
-
-
-@media (min-width: 300px){
-  .boxHeight{
-    height:4.5rem;
+@media (min-width: 300px) {
+  .boxHeight {
+    height: 4.5rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.2rem;
   }
-  .day{
+  .day {
     font-size: 0.2rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.25rem;
   }
-  .text{
+  .text {
     font-size: 0.2rem;
     margin-right: 0.3rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.3rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 100%;
     height: 35%;
     margin-top: 0.5rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 40%;
   }
-  .profile{
+  .profile {
     padding: 0.1rem 0.1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.4rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 0.9em;
     height: 0.9em;
   }
 }
 
-
-
-@media (min-width: 500px){
-  .boxHeight{
+@media (min-width: 500px) {
+  .boxHeight {
     height: 4rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.3rem;
   }
-  .day{
+  .day {
     font-size: 0.3rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.35rem;
   }
-  .text{
+  .text {
     font-size: 0.3rem;
     margin-right: 0.3rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.3rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 100%;
     height: 60%;
     margin-top: -0.2rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 40%;
   }
-  .profile{
+  .profile {
     padding: 0.1rem 0.1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.4rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 0.9em;
     height: 0.9em;
   }
-
 }
 
-@media (min-width: 650px){
-  .boxHeight{
+@media (min-width: 650px) {
+  .boxHeight {
     height: 4rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.3rem;
   }
-  .day{
+  .day {
     font-size: 0.3rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.35rem;
   }
-  .text{
+  .text {
     font-size: 0.3rem;
     margin-right: 0.3rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 100%;
     height: 50%;
     margin-top: 0rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.3rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 40%;
   }
-  .profile{
+  .profile {
     padding: 0.1rem 0.1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.4rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 0.9em;
     height: 0.9em;
   }
 }
 
-@media (min-width: 786px){
-  .boxHeight{
+@media (min-width: 786px) {
+  .boxHeight {
     height: 4.5rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.7rem;
   }
-  .day{
+  .day {
     font-size: 0.3rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.3rem;
   }
-  .text{
+  .text {
     font-size: 0.3rem;
     margin-right: 0.2rem;
   }
-  .eventsDetailsOnBox{
+  .eventsDetailsOnBox {
     margin-bottom: 0.35rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.3rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 70%;
     height: 40%;
     margin-top: -0.2rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 50%;
   }
-  .profile{
+  .profile {
     padding: 0.1rem 0.1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.4rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 0.9em;
     height: 0.9em;
   }
 }
 
-@media (min-width: 900px){
-  .boxHeight{
+@media (min-width: 900px) {
+  .boxHeight {
     height: 4rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.7rem;
   }
-  .day{
+  .day {
     font-size: 0.4rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.35rem;
   }
-  .text{
+  .text {
     font-size: 0.35rem;
     margin-right: 0.5rem;
   }
-  .eventsDetailsOnBox{
+  .eventsDetailsOnBox {
     margin-top: 0rem;
     margin-bottom: 0rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.35rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 60%;
     height: 55%;
     margin-top: 0.1rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
+  .profile {
     padding: 0.3rem 0.3rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.45rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.4rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1rem;
     height: 1rem;
   }
 }
 
-@media (min-width: 1030px){
-  .boxHeight{
+@media (min-width: 1030px) {
+  .boxHeight {
     height: 4.7rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.7rem;
   }
-  .day{
+  .day {
     font-size: 0.5rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.5rem;
   }
-  .text{
+  .text {
     font-size: 0.5rem;
     margin-right: 0.5rem;
   }
-  .eventsDetailsOnBox{
+  .eventsDetailsOnBox {
     margin-bottom: 1rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.4rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 60%;
     height: 40%;
     margin-top: 0.3rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
+  .profile {
     padding: 0.5rem 0.7rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.5rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.5rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1.4rem;
     height: 1.4rem;
   }
 }
 
-@media (min-width: 1250px){
-  .boxHeight{
+@media (min-width: 1250px) {
+  .boxHeight {
     height: 5.2rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.7rem;
   }
-  .day{
+  .day {
     font-size: 0.5rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.5rem;
   }
-  
-  .text{
+
+  .text {
     font-size: 0.4rem;
     margin-right: 0.5rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 55%;
     height: 50%;
     margin-top: 0.3rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
-    padding: 0.6rem 1rem;
+  .profile {
+    padding: 0.25rem 1rem;
   }
-  .profile_title{
+  .profile_title {
+    font-size: 0.5rem;
+  }
+  .profile_para {
     font-size: 0.7rem;
   }
-  .profile_para{
-    font-size: 0.7rem;
-  }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1.4em;
     height: 1.4em;
   }
 }
 
-
 @media (min-width: 1400px) {
-  .boxHeight{
+  .boxHeight {
     height: 6rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 0.8rem;
   }
-  .day{
+  .day {
     font-size: 0.8rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 0.8rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.53rem;
   }
-  .text{
+  .text {
     font-size: 0.6rem;
     margin-right: 0.5rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 60%;
     height: 35%;
     margin-top: 1rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
+  .profile {
     padding: 0.6rem 1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.7rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.7rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1.4em;
     height: 1.4em;
   }
 }
 
-@media (min-width: 1600px){
-  .boxHeight{
+@media (min-width: 1600px) {
+  .boxHeight {
     height: 7rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.6rem;
   }
 }
 
 @media (min-width: 1900px) {
-  .boxHeight{
+  .boxHeight {
     height: 8rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 1rem;
   }
-  .day{
+  .day {
     font-size: 0.9rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 1rem;
   }
-  .text{
+  .text {
     font-size: 0.8rem;
     margin-right: 0.5rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 0.6rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 50%;
     height: 30%;
     margin-top: 2.4rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
+  .profile {
     padding: 0.6rem 1rem;
   }
-  .profile_title{
+  .profile_title {
     font-size: 0.8rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 0.7rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1.5em;
     height: 1.5em;
   }
@@ -772,95 +772,92 @@ color: #888;
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 2000px) {
-  .boxHeight{
+  .boxHeight {
     height: 10rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 1rem;
   }
-  .day{
+  .day {
     font-size: 0.9rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 1rem;
   }
-  .text{
+  .text {
     font-size: 0.8rem;
     margin-right: 0.5rem;
   }
-  .eventsDetailsOnBox_text{
+  .eventsDetailsOnBox_text {
     font-size: 1.2rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 55%;
     height: 30%;
     margin-top: 3.8rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
-  .profile{
+  .profile {
     padding: 0.6rem 1rem;
   }
-  
-  .profile_title{
+
+  .profile_title {
     font-size: 0.8rem;
   }
-  .profile_para{
+  .profile_para {
     font-size: 1rem;
   }
-  .hasEvents::before{
+  .hasEvents::before {
     width: 1.5em;
     height: 1.5em;
   }
 }
 
 @media (min-width: 2500px) {
-  .boxHeight{
+  .boxHeight {
     height: 10.5rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 1.1rem;
   }
-  .day{
+  .day {
     font-size: 1rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 1.1rem;
   }
-  .text{
+  .text {
     font-size: 0.8rem;
     margin-right: 0.7rem;
   }
 }
 
 @media (min-width: 3000px) {
-  .boxHeight{
+  .boxHeight {
     height: 16.5rem;
   }
-  .daysWeek{
+  .daysWeek {
     font-size: 2.1rem;
   }
-  .day{
+  .day {
     font-size: 1.7rem;
   }
-  .daysNumber{
+  .daysNumber {
     font-size: 1.7rem;
   }
-  .text{
+  .text {
     font-size: 1.2rem;
     width: 50%;
     margin-right: 2rem;
   }
-  .bookmarkBtn{
+  .bookmarkBtn {
     width: 60%;
     height: 30%;
     margin-top: 7rem;
   }
-  .IconContainer{
+  .IconContainer {
     width: 30%;
   }
 }
-
-
-

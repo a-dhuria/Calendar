@@ -1,5 +1,3 @@
-// SmallCalendar.js
-import axios from "axios";
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../../Context/GlobalContext";
@@ -10,30 +8,23 @@ import ModalContainer from "../../ModalContainer/Modalcontainer";
 export default function SmallCalendar() {
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [showEventModalAtSmall, setShowEventModalAtSmall] = useState(false);
 
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
   }, [currentMonthIdx]);
 
-  const { monthIndex, setSmallCalendarMonth, setDaySelected, daySelected } =
-    useContext(GlobalContext);
+  const {
+    monthIndex,
+    setSmallCalendarMonth,
+    setDaySelected,
+    daySelected,
+    siteData,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonthIdx(monthIndex);
   }, [monthIndex]);
-
-  async function fetchUpcomingEvents() {
-    try {
-      const response = await axios.get(
-        "https://prod-33.eastus.logic.azure.com/workflows/5ecb6d8f908e4752991c3c23e16e39c5/triggers/When_a_HTTP_request_is_received/paths/invoke/allcourseswithstatus?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=YXSyfVCQ_CiACJRuAages-B-rTvCBsAadMFFTnN-FXY"
-      );
-      setUpcomingEvents(response.data.Table1);
-    } catch (error) {
-      console.error("Error fetching upcoming events:", error);
-    }
-  }
 
   function handlePrevMonth() {
     setCurrentMonthIdx(currentMonthIdx - 1);
@@ -114,7 +105,6 @@ export default function SmallCalendar() {
       <button
         className="eventsModalOpenClickButton" // Add the calendar-view-btn class
         onClick={() => {
-          fetchUpcomingEvents();
           setShowEventModalAtSmall(true);
         }}
       >
@@ -127,49 +117,61 @@ export default function SmallCalendar() {
             <table className="fl-table" id="style-3">
               <thead>
                 <tr>
+                  <th>Course Name</th>
                   <th>practice</th>
                   <th>Source</th>
                   <th>Start Program Date</th>
                   <th>End Program Date</th>
                   <th>Start time</th>
                   <th>End Time </th>
-                  <th>Course Name</th>
                   <th>Target Audience</th>
                   <th>Format</th>
                   <th>Registration</th>
                 </tr>
               </thead>
               <tbody>
-                {upcomingEvents.map((event, index) => (
-                  <tr key={index}>
-                    <td>{event.practice}</td>
-                    <td>{event.source}</td>
-                    <td>{event.startProgramDates}</td>
-                    <td>{event.endProgramDates}</td>
-                    <td>{event.startTime}</td>
-                    <td>{event.endTime}</td>
-                    <td>{event.courseName}</td>
-                    <td>{event.targetAudience}</td>
-                    <td>{event.format}</td>
-                    <td>
-                      <div>
-                        {!isEventDatePast(new Date(event.startProgramDates)) &&
-                        event.registrationLink ? (
-                          <button
-                            className="eventsModalOpenClickButton"
-                            onClick={() =>
-                              RedirectToPage(event.registrationLink)
-                            }
-                          >
-                            Apply
-                          </button>
-                        ) : (
-                          <button className="upcoming-eventss">TBD</button>
-                        )}
-                      </div>
-                    </td>
+                {siteData
+                  .filter((event) => {
+                    const [day, month, year] = event.endProgramDates.split("-");
+                    const eventDate = new Date(year, month - 1, day);
+                    return eventDate >= new Date().setHours(0, 0, 0, 0);
+                  })
+                  .map((event, index) => (
+                    <tr key={index}>
+                      <td>{event.courseName}</td>
+                      <td>{event.practice}</td>
+                      <td>{event.source}</td>
+                      <td>{event.startProgramDates}</td>
+                      <td>{event.endProgramDates}</td>
+                      <td>{event.startTime}</td>
+                      <td>{event.endTime}</td>
+                      <td>{event.targetAudience}</td>
+                      <td>{event.format}</td>
+                      <td>
+                        <div>
+                          {!isEventDatePast(
+                            new Date(event.startProgramDates)
+                          ) && event.registrationLink ? (
+                            <button
+                              className="eventsModalOpenClickButton"
+                              onClick={() =>
+                                RedirectToPage(event.registrationLink)
+                              }
+                            >
+                              Apply
+                            </button>
+                          ) : (
+                            <button className="upcoming-eventss">TBD</button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                {siteData.length === 0 && (
+                  <tr>
+                    <td colSpan="10">No Upcoming events</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
